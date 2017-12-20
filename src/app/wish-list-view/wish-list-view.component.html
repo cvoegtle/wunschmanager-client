@@ -1,4 +1,4 @@
-<mat-expansion-panel>
+<mat-expansion-panel (opened)="panelOpened()">
   <mat-expansion-panel-header>
     <mat-panel-title>
       {{wishList.event}}
@@ -7,8 +7,7 @@
       {{wishList.id}}
     </mat-panel-description>
   </mat-expansion-panel-header>
+  <wish-view *ngFor="let wish of wishes" [wish]="wish"></wish-view>
 
-  <p>
-    {{wishList.id}}
-  </p>
+  <button (click)="addWish()" mat-raised-button>neuer Wunsch</button>
 </mat-expansion-panel>

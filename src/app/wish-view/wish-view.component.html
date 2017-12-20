@@ -1,0 +1,15 @@
+<mat-card>
+  <form class="wish-form">
+    <mat-form-field class="wish-full-width">
+      <input matInput placeholder="Wunsch" [value]="wish.caption">
+    </mat-form-field>
+
+    <mat-form-field class="wish-full-width">
+      <textarea matInput placeholder="Beschreibung" [value]="wish.description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="wish-full-width">
+      <input matInput placeholder="Link" [value]="wish.link">
+    </mat-form-field>
+  </form>
+</mat-card>

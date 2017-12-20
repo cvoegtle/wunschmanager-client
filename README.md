@@ -1,6 +1,6 @@
 # WunschmanagerClient
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.1.
+Web Interface für die Wunschlisten-Verwaltung. Geschrieben mit Angular 5 und erstellt mit dem Angular CLI 1.6.1
 
 ## Development server
 

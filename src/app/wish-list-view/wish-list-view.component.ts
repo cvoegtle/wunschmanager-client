@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { WishList } from "../services/wish-list";
 import { Wish } from "../services/wish";
 import { WishService } from "../services/wish.service";
@@ -11,6 +11,8 @@ import { MatButton } from "@angular/material";
 })
 export class WishListViewComponent implements OnInit {
   @Input() wishList: WishList;
+  @Output() deleted = new EventEmitter<number>();
+
   wishes: Wish[];
   errorMessage: string;
 
@@ -25,11 +27,12 @@ export class WishListViewComponent implements OnInit {
             error => this.errorMessage = <any>error)
   }
 
-  processWishes() {
+  addWish() {
+    this.wishService.add(this.wishList.id).subscribe(wish => this.wishes.push(wish),
+        error => this.errorMessage = <any>error)
   }
 
-  addWish() {
-    this.wishService.addWish(this.wishList.id).subscribe(wish => this.wishes.push(wish),
-        error => this.errorMessage = <any>error)
+  deleteClicked() {
+    this.deleted.emit(this.wishList.id);
   }
 }

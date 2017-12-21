@@ -5,6 +5,13 @@
     </mat-panel-title>
     <mat-panel-description>
       {{wishList.id}}
+
+      <span class="filler"></span>
+
+      <button mat-icon-button (click)="deleteClicked()">
+        <i class="material-icons">delete</i>
+      </button>
+
     </mat-panel-description>
   </mat-expansion-panel-header>
   <wish-view *ngFor="let wish of wishes" [wish]="wish"></wish-view>

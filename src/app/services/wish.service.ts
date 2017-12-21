@@ -11,20 +11,12 @@ export class WishService {
   constructor(private http: Http) {
   }
 
-  fetchWishList(): Observable<WishList[]> {
-    return this.http.get(this.baseUrl + '/wishlist/list').map(this.extractData).catch(this.handleError);
-  }
-
-  createWishList(event: string): Observable<WishList> {
-    return this.http.get(this.baseUrl + '/wishlist/create?event=' + event).map(this.extractData).catch(this.handleError);
-  }
-
   fetchWishes(wishListId: number): Observable<Wish[]> {
     return this.http.get(this.baseUrl + '/wish/list?list=' + wishListId).map(this.extractData)
         .catch(this.handleError);
   }
 
-  addWish(wishListId: number): Observable<Wish> {
+  add(wishListId: number): Observable<Wish> {
     return this.http.get(this.baseUrl + '/wish/create?list=' + wishListId).map(this.extractData)
         .catch(this.handleError);
   }

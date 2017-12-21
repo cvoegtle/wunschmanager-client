@@ -1,11 +1,10 @@
 <mat-accordion>
-  <wish-list-view *ngFor="let list of wishLists" [wishList]="list"></wish-list-view>
+  <wish-list-view *ngFor="let list of wishLists" [wishList]="list" (deleted)="onDeleteList($event)"></wish-list-view>
 </mat-accordion>
 <form>
   <mat-form-field class="wish-list-name">
   <input matInput placeholder="Neue Wunschliste" [(ngModel)]="newWishListEvent" name="newWishListInput">
   </mat-form-field>
   <button (click)="createWishList()" [disabled]="!isCreatePossible()" mat-raised-button>anlegen</button>
-  <button (click)="createWishList()" [disabled]="isCreatePossible()" mat-raised-button>anlegen</button>
 </form>
 <p>{{errorMessage}}</p>

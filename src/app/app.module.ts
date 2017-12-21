@@ -18,6 +18,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { WishListViewComponent } from './wish-list-view/wish-list-view.component';
 import { WishService } from "./services/wish.service";
 import { WishViewComponent } from './wish-view/wish-view.component';
+import { WishListService } from "./services/wish-list.service";
 
 @NgModule({
   exports: [
@@ -69,7 +70,7 @@ export class WishMaterialModule {
     ReactiveFormsModule, FormsModule,
     HttpModule
   ],
-  providers: [WishService],
+  providers: [WishService, WishListService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

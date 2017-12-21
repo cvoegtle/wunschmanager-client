@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Wish } from "../services/wish";
 
 @Component({
@@ -8,10 +8,15 @@ import { Wish } from "../services/wish";
 })
 export class WishViewComponent implements OnInit {
   @Input() wish: Wish;
+  @Output() deleted = new EventEmitter<number>();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  deleteClicked() {
+    this.deleted.emit(this.wish.id);
   }
 
 }

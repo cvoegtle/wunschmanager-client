@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from "@angular/http";
 import { Observable } from "rxjs/Observable";
-import { WishList } from "./wish-list";
 import { Wish } from "./wish";
 
 @Injectable()
@@ -18,6 +17,11 @@ export class WishService {
 
   add(wishListId: number): Observable<Wish> {
     return this.http.get(this.baseUrl + '/wish/create?list=' + wishListId).map(this.extractData)
+        .catch(this.handleError);
+  }
+
+  delete(wishId: number): Observable<boolean> {
+    return this.http.get(this.baseUrl + '/wish/delete?id=' + wishId).map(this.extractData)
         .catch(this.handleError);
   }
 

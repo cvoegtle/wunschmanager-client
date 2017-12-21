@@ -1,9 +1,11 @@
 <mat-card>
   <form class="wish-form">
-    <mat-form-field class="wish-full-width">
-      <input matInput placeholder="Wunsch" [value]="wish.caption">
-    </mat-form-field>
-
+      <mat-form-field class="wish-full-width">
+        <input matInput placeholder="Wunsch" [value]="wish.caption">
+      </mat-form-field>
+      <button mat-icon-button (click)="deleteClicked()">
+        <i class="material-icons">delete</i>
+      </button>
     <mat-form-field class="wish-full-width">
       <textarea matInput placeholder="Beschreibung" [value]="wish.description" matTextareaAutosize
                 matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>

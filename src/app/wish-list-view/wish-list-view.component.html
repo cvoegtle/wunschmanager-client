@@ -16,6 +16,6 @@
   </mat-expansion-panel-header>
   <wish-view *ngFor="let wish of wishes" [wish]="wish"></wish-view>
 
-  <button (click)="addWish()" mat-raised-button>neuer Wunsch</button>
+  <button (click)="addWish()" mat-raised-button class="add-button">neuer Wunsch</button>
 </mat-expansion-panel>
 <p>{{errorMessage}}</p>

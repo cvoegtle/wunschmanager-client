@@ -1,4 +1,4 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Http, Response } from "@angular/http";
 import { Observable } from "rxjs/Observable";
 import { WishList } from "./wish-list";
@@ -8,20 +8,24 @@ import { Wish } from "./wish";
 export class WishService {
   private baseUrl: string = 'http://localhost:8080';
 
-  public wishlistChanged = new EventEmitter<Date>();
-
   constructor(private http: Http) {
   }
 
   fetchWishList(): Observable<WishList[]> {
-    this.wishlistChanged.emit(new Date());
-    return this.http.get(this.baseUrl + '/wishlist/list').map(this.extractData)
-        .catch(this.handleError);
+    return this.http.get(this.baseUrl + '/wishlist/list').map(this.extractData).catch(this.handleError);
+  }
+
+  createWishList(event: string): Observable<WishList> {
+    return this.http.get(this.baseUrl + '/wishlist/create?event=' + event).map(this.extractData).catch(this.handleError);
   }
 
   fetchWishes(wishListId: number): Observable<Wish[]> {
-    this.wishlistChanged.emit(new Date());
     return this.http.get(this.baseUrl + '/wish/list?list=' + wishListId).map(this.extractData)
+        .catch(this.handleError);
+  }
+
+  addWish(wishListId: number): Observable<Wish> {
+    return this.http.get(this.baseUrl + '/wish/create?list=' + wishListId).map(this.extractData)
         .catch(this.handleError);
   }
 

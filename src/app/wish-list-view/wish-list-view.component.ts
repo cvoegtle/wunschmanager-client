@@ -22,13 +22,14 @@ export class WishListViewComponent implements OnInit {
 
   panelOpened() {
     this.wishService.fetchWishes(this.wishList.id).subscribe(wishes => this.wishes = wishes,
-            error => this.errorMessage = <any>error, () => this.processWishes())
+            error => this.errorMessage = <any>error)
   }
 
   processWishes() {
   }
 
   addWish() {
-
+    this.wishService.addWish(this.wishList.id).subscribe(wish => this.wishes.push(wish),
+        error => this.errorMessage = <any>error)
   }
 }

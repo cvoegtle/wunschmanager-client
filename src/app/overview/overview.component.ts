@@ -9,6 +9,7 @@ import { WishList } from "../services/wish-list";
 })
 export class OverviewComponent implements OnInit {
   wishLists: WishList[];
+  public newWishListEvent: string = "";
   errorMessage: string;
 
   constructor(private wishService: WishService) { }
@@ -19,10 +20,16 @@ export class OverviewComponent implements OnInit {
 
   private fetchWishLists(): void {
     this.wishService.fetchWishList().subscribe(wishLists => this.wishLists = wishLists,
-        error => this.errorMessage = <any>error, () => this.processWishLists());
+        error => this.errorMessage = <any>error);
   }
 
+  createWishList() {
+    this.wishService.createWishList(this.newWishListEvent).subscribe(wishList => this.wishLists.push(wishList),
+        error => this.errorMessage = <any>error);
+    this.newWishListEvent = "";
+  }
 
-  private processWishLists() {
+  isCreatePossible(): boolean {
+    return this.newWishListEvent.length > 0;
   }
 }

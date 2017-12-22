@@ -26,13 +26,14 @@ export class WishService {
         catchError(this.handleError<Wish>('wish/create')));
   }
 
-  delete(wishId: number): Observable<boolean> {
-    return this.http.get<boolean>(this.baseUrl + '/wish/delete?id=' + wishId).pipe(tap(_ => {}),
+  delete(listId: number, wishId: number): Observable<boolean> {
+    return this.http.get<boolean>(this.baseUrl + `/wish/delete?listId=${listId}&wishId=${wishId}`).pipe(tap(_ => {}),
         catchError(this.handleError<boolean>('wish/delete')));
   }
 
-  update(wish: Wish): Observable<boolean> {
-    return this.http.post<boolean>(this.baseUrl + '/wish/update', wish, httpOptions).pipe(tap(_ => {}),
+  update(listId: number, wish: Wish): Observable<boolean> {
+    let updateRequest = { listId: listId, wish: wish };
+    return this.http.post<boolean>(this.baseUrl + '/wish/update', updateRequest, httpOptions).pipe(tap(_ => {}),
         catchError(this.handleError<boolean>('wish/update')));
   }
 

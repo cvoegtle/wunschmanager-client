@@ -32,7 +32,7 @@ export class WishListViewComponent implements OnInit {
   }
 
   wishChanged(wish: Wish) {
-    this.wishService.update(wish).subscribe(result => {
+    this.wishService.update(this.wishList.id, wish).subscribe(result => {
           if (!result) {
             alert("Update fehlgeschlagen")
           }
@@ -41,7 +41,7 @@ export class WishListViewComponent implements OnInit {
   }
 
   deleteWish(id: number) {
-    this.wishService.delete(id).subscribe(result => {
+    this.wishService.delete(this.wishList.id, id).subscribe(result => {
       if (result) this.removeFromList(id)
     }, error => this.errorMessage = <any>error)
   }

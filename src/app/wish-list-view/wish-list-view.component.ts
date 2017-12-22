@@ -31,6 +31,15 @@ export class WishListViewComponent implements OnInit {
         error => this.errorMessage = <any>error)
   }
 
+  wishChanged(wish: Wish) {
+    this.wishService.update(wish).subscribe(result => {
+          if (!result) {
+            alert("Update fehlgeschlagen")
+          }
+        }, error => this.errorMessage = <any>error
+    )
+  }
+
   deleteWish(id: number) {
     this.wishService.delete(id).subscribe(result => {
       if (result) this.removeFromList(id)

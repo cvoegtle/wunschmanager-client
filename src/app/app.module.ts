@@ -13,7 +13,7 @@ import {
   MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatStepperModule, MatTableModule, MatTabsModule,
   MatToolbarModule, MatTooltipModule,
 } from '@angular/material';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { CdkTableModule } from '@angular/cdk/table';
 import { WishListViewComponent } from './wish-list-view/wish-list-view.component';
 import { WishService } from "./services/wish.service";
@@ -66,9 +66,8 @@ export class WishMaterialModule {
     AppComponent, OverviewComponent, WishListViewComponent, WishViewComponent
   ],
   imports: [
-    BrowserModule, BrowserAnimationsModule, WishMaterialModule, MatNativeDateModule,
-    ReactiveFormsModule, FormsModule,
-    HttpModule
+    BrowserModule, HttpClientModule, FormsModule, BrowserAnimationsModule, WishMaterialModule, MatNativeDateModule,
+    ReactiveFormsModule
   ],
   providers: [WishService, WishListService],
   bootstrap: [AppComponent]

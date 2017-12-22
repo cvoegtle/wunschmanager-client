@@ -1,36 +1,40 @@
 import { Injectable } from '@angular/core';
 import { WishList } from "./wish-list";
 import { Observable } from "rxjs/Observable";
-import { Http, Response } from "@angular/http";
+import { HttpClient } from "@angular/common/http";
+import { catchError, map, tap } from 'rxjs/operators';
+import { of } from "rxjs/observable/of";
 
 @Injectable()
 export class WishListService {
   private baseUrl: string = 'http://localhost:8080';
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
   }
 
   fetch(): Observable<WishList[]> {
-    return this.http.get(this.baseUrl + '/wishlist/list').map(this.extractData).catch(this.handleError);
+    return this.http.get<WishList[]>(this.baseUrl + '/wishlist/list').pipe(tap(_ => {}),
+        catchError(this.handleError<WishList[]>('wishlist/list')));
   }
 
   create(event: string): Observable<WishList> {
-    return this.http.get(this.baseUrl + '/wishlist/create?event=' + event).map(this.extractData).catch(this.handleError);
+    return this.http.get<WishList>(this.baseUrl + '/wishlist/create?event=' + event).pipe(tap(_ => {}),
+        catchError(this.handleError<WishList>('wishlist/create')));
   }
 
   delete(id: number): Observable<boolean> {
-    return this.http.get(this.baseUrl + '/wishlist/delete?id=' + id).map(this.extractData).catch(this.handleError);
+    return this.http.get<boolean>(this.baseUrl + '/wishlist/delete?id=' + id).pipe(tap(_ => {}),
+        catchError(this.handleError<boolean>('wishlist/delete')));
   }
 
-  private extractData(response: Response) {
-    let body = response.json();
-    return body || {};
-  }
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
 
-  private handleError(error: any) {
-    let errMsg = (error.message) ? error.message :
-        error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-    console.error(errMsg); // log to console instead
-    return Observable.throw(errMsg);
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
   }
 }

@@ -1,40 +1,49 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from "@angular/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
 import { Wish } from "./wish";
+import { catchError, map, tap } from 'rxjs/operators';
+import { of } from "rxjs/observable/of";
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable()
 export class WishService {
   private baseUrl: string = 'http://localhost:8080';
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
   }
 
   fetchWishes(wishListId: number): Observable<Wish[]> {
-    return this.http.get(this.baseUrl + '/wish/list?list=' + wishListId).map(this.extractData)
-        .catch(this.handleError);
+    return this.http.get<Wish[]>(this.baseUrl + '/wish/list?list=' + wishListId).pipe(tap(_ => {}),
+        catchError(this.handleError<Wish[]>('wish/list')));
   }
 
   add(wishListId: number): Observable<Wish> {
-    return this.http.get(this.baseUrl + '/wish/create?list=' + wishListId).map(this.extractData)
-        .catch(this.handleError);
+    return this.http.get<Wish>(this.baseUrl + '/wish/create?list=' + wishListId).pipe(tap(_ => {}),
+        catchError(this.handleError<Wish>('wish/create')));
   }
 
   delete(wishId: number): Observable<boolean> {
-    return this.http.get(this.baseUrl + '/wish/delete?id=' + wishId).map(this.extractData)
-        .catch(this.handleError);
+    return this.http.get<boolean>(this.baseUrl + '/wish/delete?id=' + wishId).pipe(tap(_ => {}),
+        catchError(this.handleError<boolean>('wish/delete')));
   }
 
-  private extractData(response: Response) {
-    let body = response.json();
-    return body || {};
+  update(wish: Wish): Observable<boolean> {
+    return this.http.post<boolean>(this.baseUrl + '/wish/update', wish, httpOptions).pipe(tap(_ => {}),
+        catchError(this.handleError<boolean>('wish/update')));
   }
 
-  private handleError(error: any) {
-    let errMsg = (error.message) ? error.message :
-        error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-    console.error(errMsg); // log to console instead
-    return Observable.throw(errMsg);
-  }
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
 
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
+  }
 }

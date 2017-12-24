@@ -19,6 +19,7 @@ import { WishListViewComponent } from './wish-list-view/wish-list-view.component
 import { WishService } from "./services/wish.service";
 import { WishViewComponent } from './wish-view/wish-view.component';
 import { WishListService } from "./services/wish-list.service";
+import { UserService } from "./services/user.service";
 
 @NgModule({
   exports: [
@@ -60,7 +61,6 @@ import { WishListService } from "./services/wish-list.service";
 export class WishMaterialModule {
 }
 
-
 @NgModule({
   declarations: [
     AppComponent, OverviewComponent, WishListViewComponent, WishViewComponent
@@ -69,7 +69,7 @@ export class WishMaterialModule {
     BrowserModule, HttpClientModule, FormsModule, BrowserAnimationsModule, WishMaterialModule, MatNativeDateModule,
     ReactiveFormsModule
   ],
-  providers: [WishService, WishListService],
+  providers: [WishService, WishListService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

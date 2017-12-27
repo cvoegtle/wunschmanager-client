@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
-import { OverviewComponent } from './overview/overview.component';
+import { EditComponent } from './overview/edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule,
@@ -20,6 +20,9 @@ import { WishService } from "./services/wish.service";
 import { WishViewComponent } from './wish-view/wish-view.component';
 import { WishListService } from "./services/wish-list.service";
 import { UserService } from "./services/user.service";
+import { ViewComponent } from './view/view.component';
+import { LoginComponent } from './login/login.component';
+import { AppRoutingModule } from "./app-routing.module";
 
 @NgModule({
   exports: [
@@ -63,11 +66,11 @@ export class WishMaterialModule {
 
 @NgModule({
   declarations: [
-    AppComponent, OverviewComponent, WishListViewComponent, WishViewComponent
+    AppComponent, EditComponent, WishListViewComponent, WishViewComponent, ViewComponent, LoginComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, FormsModule, BrowserAnimationsModule, WishMaterialModule, MatNativeDateModule,
-    ReactiveFormsModule
+    ReactiveFormsModule, AppRoutingModule, MatListModule
   ],
   providers: [WishService, WishListService, UserService],
   bootstrap: [AppComponent]

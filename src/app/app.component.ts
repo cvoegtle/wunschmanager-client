@@ -15,7 +15,5 @@ export class AppComponent  implements OnInit{
   }
 
   ngOnInit(): void {
-    this.userService.fetchStatus().subscribe(status => this.userStatus = status,
-        error => this.errorMessage = <any>error);
   }
 }

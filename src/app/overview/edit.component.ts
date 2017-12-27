@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { WishList } from "../services/wish-list";
 import { WishListService } from "../services/wish-list.service";
 import { forEach } from "@angular/router/src/utils/collection";
+import { UserStatus } from "../services/user.status";
 
 @Component({
-  selector: 'wish-overview',
-  templateUrl: './overview.component.html',
-  styleUrls: ['./overview.component.css']
+  selector: 'wish-editor',
+  templateUrl: './edit.component.html',
+  styleUrls: ['./edit.component.css']
 })
-export class OverviewComponent implements OnInit {
+export class EditComponent implements OnInit {
   wishLists: WishList[];
   public newWishListEvent: string = "";
   errorMessage: string;

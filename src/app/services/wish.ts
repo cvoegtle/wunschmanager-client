@@ -3,5 +3,6 @@ export interface Wish {
   caption: string;
   description: string;
   link: string;
+  donor: string;
   available: boolean;
 }

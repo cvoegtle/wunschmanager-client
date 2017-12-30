@@ -3,6 +3,7 @@ import { WishList } from "../services/wish-list";
 import { WishListService } from "../services/wish-list.service";
 import { forEach } from "@angular/router/src/utils/collection";
 import { UserStatus } from "../services/user.status";
+import { UserService } from "../services/user.service";
 
 @Component({
   selector: 'wish-editor',
@@ -14,10 +15,14 @@ export class EditComponent implements OnInit {
   public newWishListEvent: string = "";
   errorMessage: string;
 
-  constructor(private wishListService: WishListService) {
+  constructor(private userService: UserService, private wishListService: WishListService) {
   }
 
   ngOnInit() {
+    let userStatus = this.userService.getLastUserStatus();
+    if (userStatus == null || !userStatus.loggedIn) {
+      window.location.href="/"
+    }
     this.fetchWishLists()
   }
 

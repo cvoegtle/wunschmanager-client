@@ -15,5 +15,17 @@ export class AppComponent  implements OnInit{
   }
 
   ngOnInit(): void {
+    this.userService.fetchStatus().subscribe(status => this.userStatus = status,
+            error => this.errorMessage = <any>error)
+  }
+
+  logoutClicked(): void {
+    let logoutUrl = this.userStatus.url;
+    this.userService.clearStatus();
+    window.location.href = this.userStatus.url
+  }
+
+  isLoggedIn(): boolean {
+    return this.userStatus != null && this.userStatus.loggedIn;
   }
 }

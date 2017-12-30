@@ -1,11 +1,9 @@
 <mat-expansion-panel (opened)="panelOpened()" color='accent'>
   <mat-expansion-panel-header>
     <mat-panel-title>
-      {{wishList.event}}
+      <span class="event">{{wishList.event}}</span>
     </mat-panel-title>
     <mat-panel-description>
-      {{wishList.id}}
-
       <span class="filler"></span>
 
       <button mat-icon-button (click)="deleteClicked()">

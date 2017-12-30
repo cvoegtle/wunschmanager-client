@@ -1,4 +1,9 @@
-<mat-toolbar color='primary'>Wunsch Manager </mat-toolbar>
+<mat-toolbar color='primary'>
+  <span>Wunsch Manager</span>
+  <span class="fill-remaining-space"></span>
+  <span class="user-name">{{userStatus.name}}</span>
+  <button (click)="logoutClicked()" [disabled]="!isLoggedIn()" mat-raised-button color='accent'>abmelden</button>
+</mat-toolbar>
 <div class='working-area'>
 <router-outlet></router-outlet>
 </div>

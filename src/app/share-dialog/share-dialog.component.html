@@ -1,6 +1,10 @@
 <h1 mat-dialog-title>Link zum Teilen</h1>
 <div mat-dialog-content>
   <mat-form-field class="sharing-url">
-    <input matInput [value]="data.url"/>
+    <input #url_field matInput [value]="data.url"/>
   </mat-form-field>
+  <button mat-icon-button (click)="copyClicked(url_field)">
+    <i class="material-icons">content_copy</i>
+  </button>
+
 </div>

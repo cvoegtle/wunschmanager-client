@@ -2,6 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { WishList } from "../services/wish-list";
 import { Wish } from "../services/wish";
 import { WishService } from "../services/wish.service";
+import {MatDialog} from '@angular/material';
+import { ShareDialogComponent } from "../share-dialog/share-dialog.component";
+
 
 @Component({
   selector: 'wish-list-view',
@@ -15,7 +18,7 @@ export class WishListViewComponent implements OnInit {
   wishes: Wish[];
   errorMessage: string;
 
-  constructor(private wishService: WishService) {
+  constructor(private wishService: WishService, private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -56,5 +59,14 @@ export class WishListViewComponent implements OnInit {
 
   deleteClicked() {
     this.deleted.emit(this.wishList.id);
+  }
+
+  shareClicked() {
+    let sharingUrl = window.location.href + "?wishlist=" + this.wishList.id;
+    this.dialog.open(ShareDialogComponent, {
+      data: {
+        url: sharingUrl
+      }
+    });
   }
 }

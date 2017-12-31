@@ -23,6 +23,7 @@ import { UserService } from "./services/user.service";
 import { ViewComponent } from './view/view.component';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from "./app-routing.module";
+import { ShareDialogComponent } from './share-dialog/share-dialog.component';
 
 @NgModule({
   exports: [
@@ -65,12 +66,14 @@ export class WishMaterialModule {
 }
 
 @NgModule({
+  entryComponents: [ShareDialogComponent],
   declarations: [
-    AppComponent, EditComponent, WishListViewComponent, WishViewComponent, ViewComponent, LoginComponent
+    AppComponent, EditComponent, WishListViewComponent, WishViewComponent, ViewComponent, LoginComponent,
+    ShareDialogComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, FormsModule, BrowserAnimationsModule, WishMaterialModule, MatNativeDateModule,
-    ReactiveFormsModule, AppRoutingModule, MatListModule
+    ReactiveFormsModule, AppRoutingModule, MatListModule, MatDialogModule
   ],
   providers: [WishService, WishListService, UserService],
   bootstrap: [AppComponent]

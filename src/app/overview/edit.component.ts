@@ -1,9 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { WishList } from "../services/wish-list";
 import { WishListService } from "../services/wish-list.service";
-import { forEach } from "@angular/router/src/utils/collection";
-import { UserStatus } from "../services/user.status";
 import { UserService } from "../services/user.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'wish-editor',
@@ -15,15 +14,16 @@ export class EditComponent implements OnInit {
   public newWishListEvent: string = "";
   errorMessage: string;
 
-  constructor(private userService: UserService, private wishListService: WishListService) {
+  constructor(private userService: UserService, private router: Router, private wishListService: WishListService) {
   }
 
   ngOnInit() {
     let userStatus = this.userService.getLastUserStatus();
     if (userStatus == null || !userStatus.loggedIn) {
-      window.location.href="/"
+      this.router.navigate(['/login']);
+    } else {
+      this.fetchWishLists()
     }
-    this.fetchWishLists()
   }
 
   private fetchWishLists(): void {
@@ -48,7 +48,7 @@ export class EditComponent implements OnInit {
   }
 
   removeFromList(id: number) {
-    for (let index = 0; index < this.wishLists.length; index++ ) {
+    for (let index = 0; index < this.wishLists.length; index++) {
       if (this.wishLists[index].id == id) {
         this.wishLists.splice(index, 1);
       }

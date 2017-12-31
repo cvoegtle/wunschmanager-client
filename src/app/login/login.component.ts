@@ -20,6 +20,11 @@ export class LoginComponent implements OnInit {
         error => this.errorMessage = <any>error);
   }
 
+  getLoginUrl(): string {
+    return this.userStatus != null ? this.userStatus.url : '';
+  }
+
+
   updateStatus(status: UserStatus) {
     this.userStatus = status;
     if (status.loggedIn) {

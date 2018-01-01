@@ -62,11 +62,18 @@ export class WishListViewComponent implements OnInit {
   }
 
   shareClicked() {
-    let sharingUrl = window.location.href + "?wishlist=" + this.wishList.id;
     this.dialog.open(ShareDialogComponent, {
       data: {
-        url: sharingUrl
+        url: this.createSharingUrl()
       }
     });
+  }
+
+  private createSharingUrl(): string {
+    let baseUrl = window.location.href
+    let endIndex = baseUrl.lastIndexOf('/');
+    baseUrl = baseUrl.substr(0, endIndex);
+    return baseUrl + "/share?wishlist=" + this.wishList.id;
+
   }
 }

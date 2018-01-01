@@ -1,0 +1,8 @@
+.filler {
+    flex: 1 1 auto;
+}
+
+.event {
+    margin-top: 10px;
+    font-weight: bold;
+}

@@ -6,20 +6,12 @@
     <mat-panel-description>
       <span class="filler"></span>
 
-      <button mat-icon-button (click)="shareClicked()">
-        <i class="material-icons">share</i>
-      </button>
-
       <button mat-icon-button (click)="deleteClicked()">
         <i class="material-icons">delete</i>
       </button>
 
     </mat-panel-description>
   </mat-expansion-panel-header>
-  <wish-edit *ngFor="let wish of wishes" [wish]="wish" (wishDeleted)="deleteWish($event)"
-             (wishChange)="wishChanged($event)"></wish-edit>
-  <mat-action-row>
-    <button (click)="addWish()" mat-raised-button class="add-button">neuer Wunsch</button>
-  </mat-action-row>
+  <app-wish-view *ngFor="let wish of wishes" [wish]="wish" (wishDeleted)="deleteWish($event)"></app-wish-view>
 </mat-expansion-panel>
 <p>{{errorMessage}}</p>

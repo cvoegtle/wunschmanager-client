@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
-import { EditComponent } from './overview/edit.component';
+import { EditComponent } from './edit/edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule,
@@ -24,6 +24,9 @@ import { ViewComponent } from './view/view.component';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from "./app-routing.module";
 import { ShareDialogComponent } from './share-dialog/share-dialog.component';
+import { WishViewComponent } from './wish-view/wish-view.component';
+import { WishListViewComponent } from './wish-list-view/wish-list-view.component';
+import { ShareComponent } from './shared/shared.component';
 
 @NgModule({
   exports: [
@@ -69,7 +72,7 @@ export class WishMaterialModule {
   entryComponents: [ShareDialogComponent],
   declarations: [
     AppComponent, EditComponent, WishListEditComponent, WishEditComponent, ViewComponent, LoginComponent,
-    ShareDialogComponent
+    ShareDialogComponent, WishViewComponent, WishListViewComponent, ShareComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, FormsModule, BrowserAnimationsModule, WishMaterialModule, MatNativeDateModule,

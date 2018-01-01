@@ -3,6 +3,7 @@ import { WishList } from "../services/wish-list";
 import { WishListService } from "../services/wish-list.service";
 import { UserService } from "../services/user.service";
 import { Router } from "@angular/router";
+import { UserStatus } from "../services/user.status";
 
 @Component({
   selector: 'wish-editor',
@@ -14,11 +15,15 @@ export class EditComponent implements OnInit {
   public newWishListEvent: string = "";
   errorMessage: string;
 
-  constructor(private userService: UserService, private router: Router, private wishListService: WishListService) {
+  constructor(private userService: UserService, private wishListService: WishListService, private router: Router) {
   }
 
   ngOnInit() {
-    let userStatus = this.userService.getLastUserStatus();
+    this.userService.fetchStatus().subscribe(status => this.checkStatus(status),
+        error => this.errorMessage = <any>error)
+  }
+
+  private checkStatus(userStatus: UserStatus) {
     if (userStatus == null || !userStatus.loggedIn) {
       this.router.navigate(['/login']);
     } else {
@@ -54,4 +59,5 @@ export class EditComponent implements OnInit {
       }
     }
   }
+
 }

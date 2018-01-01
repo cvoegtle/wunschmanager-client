@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Wish } from "../services/wish";
 
 @Component({
-  selector: 'wish-view',
+  selector: 'wish-edit',
   templateUrl: './wish-edit.component.html',
   styleUrls: ['./wish-edit.component.css']
 })

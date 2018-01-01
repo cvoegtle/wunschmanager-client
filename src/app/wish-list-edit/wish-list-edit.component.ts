@@ -7,7 +7,7 @@ import { ShareDialogComponent } from "../share-dialog/share-dialog.component";
 
 
 @Component({
-  selector: 'wish-list-view',
+  selector: 'wish-list-edit',
   templateUrl: './wish-list-edit.component.html',
   styleUrls: ['./wish-list-edit.component.css']
 })
@@ -73,7 +73,7 @@ export class WishListEditComponent implements OnInit {
     let baseUrl = window.location.href
     let endIndex = baseUrl.lastIndexOf('/');
     baseUrl = baseUrl.substr(0, endIndex);
-    return baseUrl + "/share?wishlist=" + this.wishList.id;
+    return baseUrl + "/share/" + this.wishList.id;
 
   }
 }

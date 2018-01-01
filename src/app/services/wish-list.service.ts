@@ -21,6 +21,11 @@ export class WishListService {
         catchError(this.handleError<WishList[]>('wishlist/list')));
   }
 
+  share(id: string): Observable<WishList[]> {
+    return this.http.get<WishList[]>(this.baseUrl + '/wishlist/share?id=' + id, httpOptions)
+        .pipe(catchError(this.handleError<WishList[]>('wishlist/share')));
+  }
+
   create(event: string): Observable<WishList> {
     return this.http.get<WishList>(this.baseUrl + '/wishlist/create?event=' + event, httpOptions).pipe(
         catchError(this.handleError<WishList>('wishlist/create')));
@@ -41,4 +46,5 @@ export class WishListService {
       return of(result as T);
     };
   }
+
 }

@@ -1,5 +1,5 @@
 <mat-accordion>
-  <wish-list-view *ngFor="let list of wishLists" [wishList]="list" (deleted)="onDeleteList($event)"></wish-list-view>
+  <wish-list-edit *ngFor="let list of wishLists" [wishList]="list" (deleted)="onDeleteList($event)"></wish-list-edit>
 </mat-accordion>
 <form>
   <mat-form-field class="wish-list-name">

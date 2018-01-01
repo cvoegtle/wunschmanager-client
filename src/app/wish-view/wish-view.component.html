@@ -1,0 +1,18 @@
+<mat-card class="wish-card">
+  <form class="wish-form">
+    <mat-list class="wish-full-width">
+      <mat-list-item *ngIf="wish.caption">
+        <div>
+          <p  class="caption">{{wish.caption}}</p>
+          <p *ngIf="wish.description">{{wish.description}}</p>
+        </div>
+        <span class="fill-remaining-space"></span>
+
+        <button mat-icon-button *ngIf="wish.link" (click)="openClicked()">
+          <i class="material-icons">visibility</i>
+        </button>
+        <span matLine *ngIf="wish.donor">{{wish.donor}}</span>
+      </mat-list-item>
+    </mat-list>
+  </form>
+</mat-card>

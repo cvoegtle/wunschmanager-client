@@ -12,23 +12,21 @@ const httpOptions = {
 @Injectable()
 export class UserService {
   private baseUrl: string = 'http://localhost:8080';
-  private lastUserStatus: UserStatus;
+  private lastUserStatus: Observable<UserStatus>;
 
   constructor(private http: HttpClient) {
   }
 
   fetchStatus(): Observable<UserStatus> {
-    return this.http.get<UserStatus>(this.baseUrl + '/user/status?startUrl=' + window.location.href, httpOptions).pipe(
-        tap(status => this.lastUserStatus = status),
-        catchError(this.handleError<UserStatus>('user/status')));
+    if (this.lastUserStatus == null) {
+      this.lastUserStatus = this.http.get<UserStatus>(this.baseUrl + '/user/status?startUrl=' + window.location.href, httpOptions).pipe(
+          catchError(this.handleError<UserStatus>('user/status')));
+    }
+    return this.lastUserStatus
   }
 
   clearStatus() {
     this.lastUserStatus = null;
-  }
-
-  getLastUserStatus(): UserStatus {
-    return this.lastUserStatus;
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

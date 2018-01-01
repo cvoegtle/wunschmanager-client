@@ -3,10 +3,10 @@ import { Wish } from "../services/wish";
 
 @Component({
   selector: 'wish-view',
-  templateUrl: './wish-view.component.html',
-  styleUrls: ['./wish-view.component.css']
+  templateUrl: './wish-edit.component.html',
+  styleUrls: ['./wish-edit.component.css']
 })
-export class WishViewComponent implements OnInit {
+export class WishEditComponent implements OnInit {
   @Input() wish: Wish;
   @Output() wishDeleted = new EventEmitter<number>();
   @Output() wishChange = new EventEmitter<Wish>();

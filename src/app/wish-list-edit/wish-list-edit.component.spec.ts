@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WishListViewComponent } from './wish-list-view.component';
+import { WishListEditComponent } from './wish-list-edit.component';
 
-describe('WishListViewComponent', () => {
-  let component: WishListViewComponent;
-  let fixture: ComponentFixture<WishListViewComponent>;
+describe('WishListEditComponent', () => {
+  let component: WishListEditComponent;
+  let fixture: ComponentFixture<WishListEditComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WishListViewComponent ]
+      declarations: [ WishListEditComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WishListViewComponent);
+    fixture = TestBed.createComponent(WishListEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

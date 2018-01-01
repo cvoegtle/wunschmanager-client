@@ -8,10 +8,10 @@ import { ShareDialogComponent } from "../share-dialog/share-dialog.component";
 
 @Component({
   selector: 'wish-list-view',
-  templateUrl: './wish-list-view.component.html',
-  styleUrls: ['./wish-list-view.component.css']
+  templateUrl: './wish-list-edit.component.html',
+  styleUrls: ['./wish-list-edit.component.css']
 })
-export class WishListViewComponent implements OnInit {
+export class WishListEditComponent implements OnInit {
   @Input() wishList: WishList;
   @Output() deleted = new EventEmitter<number>();
 

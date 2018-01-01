@@ -15,9 +15,9 @@ import {
 } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { CdkTableModule } from '@angular/cdk/table';
-import { WishListViewComponent } from './wish-list-view/wish-list-view.component';
+import { WishListEditComponent } from './wish-list-edit/wish-list-edit.component';
 import { WishService } from "./services/wish.service";
-import { WishViewComponent } from './wish-view/wish-view.component';
+import { WishEditComponent } from './wish-edit/wish-edit.component';
 import { WishListService } from "./services/wish-list.service";
 import { UserService } from "./services/user.service";
 import { ViewComponent } from './view/view.component';
@@ -68,7 +68,7 @@ export class WishMaterialModule {
 @NgModule({
   entryComponents: [ShareDialogComponent],
   declarations: [
-    AppComponent, EditComponent, WishListViewComponent, WishViewComponent, ViewComponent, LoginComponent,
+    AppComponent, EditComponent, WishListEditComponent, WishEditComponent, ViewComponent, LoginComponent,
     ShareDialogComponent
   ],
   imports: [

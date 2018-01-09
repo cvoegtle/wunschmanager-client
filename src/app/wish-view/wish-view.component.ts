@@ -14,12 +14,12 @@ export class WishViewComponent implements OnInit {
   ngOnInit() {
   }
 
-  openClicked() {
+  targetUrl() {
     let url = this.wish.link;
-    if (!url.startsWith("http")) {
+    if (url != null && url.length > 0 && !url.startsWith("http")) {
       url = "http://" + url;
     }
-    window.open(url);
+    return url;
   }
 
 }

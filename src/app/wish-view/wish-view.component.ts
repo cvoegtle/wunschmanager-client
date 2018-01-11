@@ -14,6 +14,14 @@ export class WishViewComponent implements OnInit {
   ngOnInit() {
   }
 
+  isAvailable(): boolean {
+    return true;
+  }
+
+  reserveClicked() {
+
+  }
+
   targetUrl() {
     let url = this.wish.link;
     if (url != null && url.length > 0 && !url.startsWith("http")) {

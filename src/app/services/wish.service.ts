@@ -38,6 +38,11 @@ export class WishService {
         catchError(this.handleError<boolean>('wish/update')));
   }
 
+  reserve(listId: number, wishId: number): Observable<Wish> {
+    return this.http.get<Wish>(this.baseUrl + `/wish/reserve?listId=${listId}&wishId=${wishId}`, httpOptions).pipe(
+        catchError(this.handleError<Wish>('wish/reserve')));
+  }
+
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
@@ -48,4 +53,5 @@ export class WishService {
       return of(result as T);
     };
   }
+
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Wish } from "../services/wish";
 
 @Component({
@@ -8,6 +8,8 @@ import { Wish } from "../services/wish";
 })
 export class WishViewComponent implements OnInit {
   @Input() wish: Wish;
+  @Input() user: string;
+  @Output() reserved = new EventEmitter<Wish>();
 
   constructor() { }
 
@@ -15,11 +17,15 @@ export class WishViewComponent implements OnInit {
   }
 
   isAvailable(): boolean {
-    return true;
+    return this.wish.donor == null || this.wish.donor.length == 0 || this.wish.donor == this.user;
+  }
+
+  isMyPresent() {
+    return this.wish.donor == this.user;
   }
 
   reserveClicked() {
-
+    this.reserved.emit(this.wish);
   }
 
   targetUrl() {

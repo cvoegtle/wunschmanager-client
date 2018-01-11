@@ -12,6 +12,6 @@
 
     </mat-panel-description>
   </mat-expansion-panel-header>
-  <app-wish-view *ngFor="let wish of wishes" [wish]="wish" (wishDeleted)="deleteWish($event)"></app-wish-view>
+  <app-wish-view *ngFor="let wish of wishes" [wish]="wish" [user]="userStatus.name" (reserved)="reserveClicked($event)"></app-wish-view>
 </mat-expansion-panel>
 <p>{{errorMessage}}</p>

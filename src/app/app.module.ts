@@ -20,7 +20,6 @@ import { WishService } from "./services/wish.service";
 import { WishEditComponent } from './wish-edit/wish-edit.component';
 import { WishListService } from "./services/wish-list.service";
 import { UserService } from "./services/user.service";
-import { ViewComponent } from './view/view.component';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from "./app-routing.module";
 import { ShareDialogComponent } from './share-dialog/share-dialog.component';

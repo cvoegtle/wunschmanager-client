@@ -3,4 +3,3 @@ RewriteEngine on
 RewriteRule share .
 RewriteRule login .
 RewriteRule edit .
-RewriteRule view .

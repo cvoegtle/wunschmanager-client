@@ -4,6 +4,7 @@ import { WishListService } from "../services/wish-list.service";
 import { UserService } from "../services/user.service";
 import { Router } from "@angular/router";
 import { UserStatus } from "../services/user.status";
+import { ConfigurationService } from "../services/configuration.service";
 
 @Component({
   selector: 'wish-editor',
@@ -15,10 +16,21 @@ export class EditComponent implements OnInit {
   public newWishListEvent: string = "";
   errorMessage: string;
 
-  constructor(private userService: UserService, private wishListService: WishListService, private router: Router) {
+  constructor(private configurationService: ConfigurationService,
+              private userService: UserService,
+              private wishListService: WishListService,
+              private router: Router) {
   }
 
   ngOnInit() {
+    if (this.configurationService.isInitialised()) {
+      this.fetchStatus();
+    } else {
+      this.configurationService.load().subscribe(_ => this.fetchStatus());
+    }
+  }
+
+  private fetchStatus() {
     this.userService.fetchStatus().subscribe(status => this.checkStatus(status),
         error => this.errorMessage = <any>error)
   }

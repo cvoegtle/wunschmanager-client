@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
-import { catchError, tap } from "rxjs/operators";
+import { catchError } from "rxjs/operators";
 import { UserStatus } from "./user.status";
 import { of } from "rxjs/observable/of";
+import { ConfigurationService } from "./configuration.service";
 
 const httpOptions = {
   withCredentials: true
@@ -11,15 +12,14 @@ const httpOptions = {
 
 @Injectable()
 export class UserService {
-  private baseUrl: string = 'http://localhost:8080';
   private lastUserStatus: Observable<UserStatus>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private configurationService: ConfigurationService) {
   }
 
   fetchStatus(): Observable<UserStatus> {
     if (this.lastUserStatus == null) {
-      this.lastUserStatus = this.http.get<UserStatus>(this.baseUrl + '/user/status?startUrl=' + window.location.href, httpOptions).pipe(
+      this.lastUserStatus = this.http.get<UserStatus>(this.getBaseUrl() + '/user/status?startUrl=' + window.location.href, httpOptions).pipe(
           catchError(this.handleError<UserStatus>('user/status')));
     }
     return this.lastUserStatus
@@ -38,6 +38,10 @@ export class UserService {
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
+  }
+
+  private getBaseUrl() {
+    return this.configurationService.configuration.backendUrl;
   }
 
 }

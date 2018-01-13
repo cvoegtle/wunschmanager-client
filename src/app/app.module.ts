@@ -27,6 +27,7 @@ import { WishViewComponent } from './wish-view/wish-view.component';
 import { WishListViewComponent } from './wish-list-view/wish-list-view.component';
 import { ShareComponent } from './shared/shared.component';
 import { AllSharedComponent } from './all-shared/all-shared.component';
+import { ConfigurationService } from "./services/configuration.service";
 
 @NgModule({
   exports: [
@@ -78,7 +79,7 @@ export class WishMaterialModule {
     BrowserModule, HttpClientModule, FormsModule, BrowserAnimationsModule, WishMaterialModule, MatNativeDateModule,
     ReactiveFormsModule, AppRoutingModule, MatListModule, MatDialogModule
   ],
-  providers: [WishService, WishListService, UserService],
+  providers: [WishService, WishListService, UserService, ConfigurationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

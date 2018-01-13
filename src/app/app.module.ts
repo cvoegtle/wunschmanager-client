@@ -72,7 +72,7 @@ export class WishMaterialModule {
 @NgModule({
   entryComponents: [ShareDialogComponent],
   declarations: [
-    AppComponent, EditComponent, WishListEditComponent, WishEditComponent, ViewComponent, LoginComponent,
+    AppComponent, EditComponent, WishListEditComponent, WishEditComponent, LoginComponent,
     ShareDialogComponent, WishViewComponent, WishListViewComponent, ShareComponent, AllSharedComponent
   ],
   imports: [

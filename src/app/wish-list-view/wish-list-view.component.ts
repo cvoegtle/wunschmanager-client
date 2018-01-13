@@ -12,6 +12,7 @@ import { UserStatus } from "../services/user.status";
 })
 export class WishListViewComponent implements OnInit {
   @Input() wishList: WishList;
+  @Input() deleteEnabled: boolean = true;
   @Output() deleted = new EventEmitter<number>();
 
   wishes: Wish[];

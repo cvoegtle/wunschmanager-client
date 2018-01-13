@@ -38,5 +38,4 @@ export class ShareComponent implements OnInit {
     this.wishListService.share(id).subscribe(wishLists => this.wishLists = wishLists,
         error => this.errorMessage = <any>error);
   }
-
 }

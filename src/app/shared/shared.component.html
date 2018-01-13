@@ -1,4 +1,4 @@
 <mat-accordion>
-  <wish-list-view *ngFor="let list of wishLists" [wishList]="list" (deleted)="onDeleteList($event)"></wish-list-view>
+  <wish-list-view *ngFor="let list of wishLists" [wishList]="list" [deleteEnabled]="false"></wish-list-view>
 </mat-accordion>
 <p>{{errorMessage}}</p>

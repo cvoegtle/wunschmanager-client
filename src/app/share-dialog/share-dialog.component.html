@@ -3,7 +3,7 @@
   <mat-form-field class="sharing-url">
     <input #url_field matInput [value]="data.url"/>
   </mat-form-field>
-  <button mat-icon-button (click)="copyClicked(url_field)">
+  <button mat-icon-button (click)="copyClicked(url_field)" matTooltip="In die Zwischenablage kopieren">
     <i class="material-icons">content_copy</i>
   </button>
 

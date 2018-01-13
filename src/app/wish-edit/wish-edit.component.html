@@ -12,7 +12,7 @@
       <input matInput placeholder="Link" [value]="wish.link" (change)="onLinkChange($event)">
     </mat-form-field>
   </form>
-  <button mat-icon-button (click)="deleteClicked()">
+  <button mat-icon-button (click)="deleteClicked()" matTooltip="Wunsch löschen">
     <i class="material-icons">delete</i>
   </button>
 </mat-card>

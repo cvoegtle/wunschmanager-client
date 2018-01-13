@@ -20,8 +20,16 @@ export class WishViewComponent implements OnInit {
     return this.wish.donor == null || this.wish.donor.length == 0 || this.wish.donor == this.user;
   }
 
-  isMyPresent() {
+  isMyPresent(): boolean {
     return this.wish.donor == this.user;
+  }
+
+  getTooltip() {
+    if (this.isMyPresent()) {
+      return 'Geschenk wieder freigeben';
+    } else {
+      return 'Ich möchte das schenken';
+    }
   }
 
   reserveClicked() {

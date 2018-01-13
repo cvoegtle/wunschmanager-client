@@ -29,9 +29,10 @@ export class AppComponent  implements OnInit{
   }
 
   logoutClicked(): void {
-    let logoutUrl = this.userStatus.url;
     this.userService.clearStatus();
-    window.location.href = this.userStatus.url
+    let logoutUrl = this.userStatus.url;
+    logoutUrl = logoutUrl.substr(0, logoutUrl.indexOf("=") + 1) + window.location.href;
+    window.location.href = logoutUrl;
   }
 
   isLoggedIn(): boolean {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WishList } from "../services/wish-list";
 import { WishListService } from "../services/wish-list.service";
+import { ConfigurationService } from "../services/configuration.service";
 
 @Component({
   selector: 'all-shared',
@@ -11,12 +12,19 @@ export class AllSharedComponent implements OnInit {
   wishLists: WishList[];
   errorMessage: string;
 
-  constructor(private wishListService: WishListService) { }
+  constructor(private configurationService: ConfigurationService, private wishListService: WishListService) { }
 
   ngOnInit() {
+    if (this.configurationService.isInitialised()) {
+    this.fetchSharedWishLists();
+    } else {
+      this.configurationService.load().subscribe(_ => this.fetchSharedWishLists());
+    }
+  }
+
+  private fetchSharedWishLists() {
     this.wishListService.fetchShared().subscribe(wishLists => this.wishLists = wishLists,
         error => this.errorMessage = <any>error);
-
   }
 
   onDeleteList(wishListId: number) {

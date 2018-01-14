@@ -22,12 +22,7 @@ export class ConfigurationService {
   }
 
   private getConfigurationUrl(): string {
-    let url = "./configuration";
-    let environment: string = this.route.snapshot.params['environment'];
-    if (environment != null) {
-      url += "-" + environment;
-    }
-    url += ".json";
+    let url = "./configuration.json";
     return url;
   }
 

@@ -28,6 +28,7 @@ import { WishListViewComponent } from './wish-list-view/wish-list-view.component
 import { ShareComponent } from './shared/shared.component';
 import { AllSharedComponent } from './all-shared/all-shared.component';
 import { ConfigurationService } from "./services/configuration.service";
+import { DeleteWishListDialogComponent } from './delete-wish-list-dialog/delete-wish-list-dialog.component';
 
 @NgModule({
   exports: [
@@ -70,10 +71,11 @@ export class WishMaterialModule {
 }
 
 @NgModule({
-  entryComponents: [ShareDialogComponent],
+  entryComponents: [ShareDialogComponent, DeleteWishListDialogComponent],
   declarations: [
     AppComponent, EditComponent, WishListEditComponent, WishEditComponent, LoginComponent,
-    ShareDialogComponent, WishViewComponent, WishListViewComponent, ShareComponent, AllSharedComponent
+    ShareDialogComponent, WishViewComponent, WishListViewComponent, ShareComponent, AllSharedComponent,
+    DeleteWishListDialogComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, FormsModule, BrowserAnimationsModule, WishMaterialModule, MatNativeDateModule,

@@ -2,8 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { WishList } from "../services/wish-list";
 import { Wish } from "../services/wish";
 import { WishService } from "../services/wish.service";
-import {MatDialog} from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { ShareDialogComponent } from "../share-dialog/share-dialog.component";
+import { DeleteWishListDialogComponent } from "../delete-wish-list-dialog/delete-wish-list-dialog.component";
 
 
 @Component({
@@ -58,7 +59,16 @@ export class WishListEditComponent implements OnInit {
   }
 
   deleteClicked() {
-    this.deleted.emit(this.wishList.id);
+    let deleteDialog = this.dialog.open(DeleteWishListDialogComponent, {
+      data: {
+        event: this.wishList.event,
+        id: this.wishList.id
+      }
+    });
+
+    deleteDialog.afterClosed().subscribe(result => {
+      if (result) this.deleted.emit(result);
+    });
   }
 
   shareClicked() {

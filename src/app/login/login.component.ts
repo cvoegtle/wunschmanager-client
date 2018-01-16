@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
 
   updateStatus(status: UserStatus) {
     this.userStatus = status;
-    if (status.loggedIn) {
+    if (status != null && status.loggedIn) {
       this.router.navigate(['/edit']);
     }
   }

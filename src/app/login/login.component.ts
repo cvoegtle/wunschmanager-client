@@ -37,7 +37,24 @@ export class LoginComponent implements OnInit {
   updateStatus(status: UserStatus) {
     this.userStatus = status;
     if (status != null && status.loggedIn) {
-      this.router.navigate(['/edit']);
+      if (this.getUrlParam("share")) {
+        this.router.navigate(['/share/'+this.getUrlParam("share")]);
+      } else {
+        this.router.navigate(['/edit']);
+      }
     }
+  }
+
+  private getUrlParam(prop: string ) {
+    let params = {};
+    let search = decodeURIComponent( window.location.href.slice( window.location.href.indexOf( '?' ) + 1 ) );
+    let definitions = search.split( '&' );
+
+    definitions.forEach( function( val, key ) {
+      let parts = val.split( '=', 2 );
+      params[ parts[ 0 ] ] = parts[ 1 ];
+    } );
+
+    return ( prop in params ) ? params[ prop ] : null;
   }
 }

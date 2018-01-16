@@ -36,7 +36,7 @@ export class ShareComponent implements OnInit {
 
   private checkStatus(userStatus: UserStatus) {
     if (userStatus == null || !userStatus.loggedIn) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/']);
     } else {
       const id = this.route.snapshot.paramMap.get('id');
       this.fetchSharedWishList(id);

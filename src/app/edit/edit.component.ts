@@ -37,7 +37,7 @@ export class EditComponent implements OnInit {
 
   private checkStatus(userStatus: UserStatus) {
     if (userStatus == null || !userStatus.loggedIn) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/']);
     } else {
       this.fetchWishLists()
     }

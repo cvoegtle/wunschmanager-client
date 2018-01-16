@@ -40,13 +40,6 @@ export class AppComponent  implements OnInit{
     this.router.navigate(['/edit'])
   }
 
-  logoutClicked(): void {
-    this.userService.clearStatus();
-    let logoutUrl = this.userStatus.url;
-    logoutUrl = logoutUrl.substr(0, logoutUrl.indexOf("=") + 1) + window.location.href;
-    window.location.href = logoutUrl;
-  }
-
   isLoggedIn(): boolean {
     return this.userStatus != null && this.userStatus.loggedIn;
   }

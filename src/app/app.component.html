@@ -5,7 +5,7 @@
 
   <span>Wunsch Manager</span>
   <span class="fill-remaining-space"></span>
-  <a *ngIf="isLoggedIn()" href="{{userStatus.url}}" class="user-name">{{userStatus?.name}} abmelden</a>
+  <a *ngIf="isLoggedIn()" href="{{userStatus.url}}" class="user-name"><span>{{userStatus?.name}}</span> <i class="material-icons" style="display: inline;">power_settings_new</i></a>
 </mat-toolbar>
 <div class='working-area'>
 <router-outlet></router-outlet>

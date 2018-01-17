@@ -33,7 +33,7 @@ export class AppComponent  implements OnInit{
   }
 
   isAwayFromHome() {
-    return window.location.pathname.indexOf("login") < 0 && window.location.pathname.indexOf("edit") < 0;
+    return window.location.pathname.indexOf("share") >= 0;
   }
 
   homeClicked() {

@@ -19,11 +19,16 @@ export class UserService {
 
   fetchStatus(): Observable<UserStatus> {
     if (this.lastUserStatus == null) {
-      this.lastUserStatus = this.http.get<UserStatus>(this.getBaseUrl() + '/user/status?startUrl=' + window.location.href, httpOptions).pipe(
+      this.lastUserStatus = this.http.get<UserStatus>(this.getBaseUrl() + '/user/status?startUrl=' + this.getApplicationUrl(), httpOptions).pipe(
           catchError(this.handleError<UserStatus>('user/status')));
     }
     return this.lastUserStatus
   }
+
+  getApplicationUrl() {
+    return window.location.href;
+  }
+
 
   clearStatus() {
     this.lastUserStatus = null;

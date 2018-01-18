@@ -1,0 +1,6 @@
+{
+  "name": "Wunschmanager",
+  "short_name": "Wunschmanager",
+  "start_url": "https://wunschmanager.appspot.com/",
+  "display": "standalone"
+}

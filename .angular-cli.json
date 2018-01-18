@@ -11,6 +11,7 @@
         "assets",
         "favicon.ico",
         ".htaccess",
+        "manifest.webapp",
         "configuration.json"
       ],
       "index": "index.html",

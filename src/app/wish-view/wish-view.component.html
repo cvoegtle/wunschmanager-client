@@ -1,4 +1,4 @@
-<mat-card class="wish-card" *ngIf="wish.caption || wish.description">
+<mat-card [ngClass]="{'wish-card': true, 'unavailable': !isAvailable()}"  *ngIf="wish.caption || wish.description">
   <div class="wish-form">
     <mat-list class="wish-full-width">
       <mat-list-item class="wish-line">

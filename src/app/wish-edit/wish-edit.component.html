@@ -1,5 +1,6 @@
-<mat-card class="wish-card">
-  <form class="wish-form">
+<mat-card class="wish-card ">
+  <div class="wish-form">
+  <form class="wish-full-width">
       <mat-form-field class="wish-full-width">
         <input matInput placeholder="Wunsch" [value]="wish.caption" (change)="onCaptionChange($event)">
       </mat-form-field>
@@ -11,8 +12,10 @@
     <mat-form-field class="wish-full-width">
       <input matInput placeholder="Link" [value]="wish.link" (change)="onLinkChange($event)">
     </mat-form-field>
+    <p matLine *ngIf="wish.donor">{{wish.donor}}</p>
   </form>
   <button mat-icon-button (click)="deleteClicked()" matTooltip="Wunsch löschen">
     <i class="material-icons">delete</i>
   </button>
+  </div>
 </mat-card>

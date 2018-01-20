@@ -35,9 +35,9 @@ export class WishListService {
         .pipe(catchError(this.handleError<WishList[]>('wishlist/shared')));
   }
 
-  create(event: string): Observable<WishList> {
-    return this.http.get<WishList>(this.getBaseUrl() + '/wishlist/create?event=' + event, httpOptions).pipe(
-        catchError(this.handleError<WishList>('wishlist/create')));
+  create(event: string, managed: boolean): Observable<WishList> {
+    return this.http.get<WishList>(this.getBaseUrl() + '/wishlist/create?event=' + event + '&managed=' + managed,
+        httpOptions).pipe(catchError(this.handleError<WishList>('wishlist/create')));
   }
 
   delete(id: number): Observable<boolean> {

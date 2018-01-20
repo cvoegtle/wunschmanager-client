@@ -14,6 +14,7 @@ import { ConfigurationService } from "../services/configuration.service";
 export class EditComponent implements OnInit {
   wishLists: WishList[];
   public newWishListEvent: string = "";
+  public newListIsManaged:boolean = false;
   errorMessage: string;
 
   constructor(private configurationService: ConfigurationService,
@@ -49,9 +50,10 @@ export class EditComponent implements OnInit {
   }
 
   createWishList() {
-    this.wishListService.create(this.newWishListEvent).subscribe(wishList => this.wishLists.push(wishList),
-        error => this.errorMessage = <any>error);
+    this.wishListService.create(this.newWishListEvent, this.newListIsManaged).
+    subscribe(wishList => this.wishLists.push(wishList), error => this.errorMessage = <any>error);
     this.newWishListEvent = "";
+    this.newListIsManaged = false;
   }
 
   isCreatePossible(): boolean {

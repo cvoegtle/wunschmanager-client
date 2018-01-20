@@ -10,3 +10,9 @@
     margin-top: 10px;
     font-weight: bold;
 }
+
+.managed {
+    margin-top: 10px;
+    margin-left: 5px;
+    color: grey;
+}

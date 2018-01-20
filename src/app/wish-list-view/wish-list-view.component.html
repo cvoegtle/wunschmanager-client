@@ -4,7 +4,7 @@
       <span class="event">{{wishList.event}}</span>
     </mat-panel-title>
     <mat-panel-description>
-      <span class="filler">{{wishList.owner | name}}</span>
+      <span class="filler">{{wishList.owner | name}} <span *ngIf="wishList.managed">(Verwalter)</span></span>
 
       <button *ngIf="deleteEnabled" mat-icon-button (click)="deleteClicked()" matTooltip="Wunschliste aus der Ansicht entfernen">
         <i class="material-icons">delete</i>

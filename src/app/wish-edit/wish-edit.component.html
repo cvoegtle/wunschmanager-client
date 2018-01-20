@@ -12,7 +12,7 @@
     <mat-form-field class="wish-full-width">
       <input matInput placeholder="Link" [value]="wish.link" (change)="onLinkChange($event)">
     </mat-form-field>
-    <p matLine *ngIf="wish.donor">{{wish.donor}}</p>
+    <a matLine *ngIf="wish.donor" href="mailto:{{wish.donor}}">{{wish.donor}}</a>
   </form>
   <button mat-icon-button (click)="deleteClicked()" matTooltip="Wunsch löschen">
     <i class="material-icons">delete</i>

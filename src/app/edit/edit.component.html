@@ -6,7 +6,7 @@
   <input matInput placeholder="Neue Wunschliste" [(ngModel)]="newWishListEvent" name="newWishListInput">
   </mat-form-field>
   <mat-checkbox  class="wish-list-managed" [(ngModel)]="newListIsManaged" name="newListIsManagedInput">verwalten</mat-checkbox>
-  <button (click)="createWishList()" [disabled]="!isCreatePossible()" mat-raised-button>anlegen</button>
+  <button (click)="createWishList()" color="primary" [disabled]="!isCreatePossible()" mat-raised-button>anlegen</button>
 </form>
 <div class="divider"></div>
 <all-shared></all-shared>

@@ -5,10 +5,10 @@
 
   <span>Wunsch Manager</span>
   <span class="fill-remaining-space"></span>
-  <a *ngIf="isLoggedIn()" href="{{userStatus.url}}" class="user-name"><span>{{userStatus?.name | name}}</span> <i class="material-icons" style="display: inline;margin-left: 5px;">power_settings_new</i></a>
+  <button *ngIf="isLoggedIn()" (click)="logoutClicked()" mat-raised-button color='accent'>{{userStatus?.name | name}}  <i class="material-icons" style="display: inline;margin-left: 5px;">power_settings_new</i></button>
 </mat-toolbar>
 <div class='working-area'>
 <router-outlet></router-outlet>
 </div>
 <hr>
-<span class="mat-body-1 app-footer">Wunschmanager Version 0.2</span>
+<span class="mat-body-1 app-footer">Wunschmanager Version 0.3</span>

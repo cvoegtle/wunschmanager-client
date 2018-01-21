@@ -20,7 +20,7 @@
   <wish-edit *ngFor="let wish of wishes" [wish]="wish" (wishDeleted)="deleteWish($event)"
              (wishChange)="wishChanged($event)"></wish-edit>
   <mat-action-row>
-    <button (click)="addWish()" mat-raised-button class="add-button">neuer Wunsch</button>
+    <button (click)="addWish()" mat-fab matTooltip="Wunsch hinzufügen" class="add-button">+</button>
   </mat-action-row>
 </mat-expansion-panel>
 <p>{{errorMessage}}</p>

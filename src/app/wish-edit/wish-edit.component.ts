@@ -8,7 +8,7 @@ import { Wish } from "../services/wish";
 })
 export class WishEditComponent implements OnInit {
   @Input() wish: Wish;
-  @Output() wishDeleted = new EventEmitter<number>();
+  @Output() wishDeleted = new EventEmitter<Wish>();
   @Output() wishChange = new EventEmitter<Wish>();
 
   constructor() { }
@@ -17,7 +17,7 @@ export class WishEditComponent implements OnInit {
   }
 
   deleteClicked() {
-    this.wishDeleted.emit(this.wish.id);
+    this.wishDeleted.emit(this.wish);
   }
 
   onCaptionChange(event) {

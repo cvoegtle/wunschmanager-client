@@ -4,7 +4,7 @@ import { Wish } from "../services/wish";
 import { WishService } from "../services/wish.service";
 import { MatDialog } from '@angular/material';
 import { ShareDialogComponent } from "../share-dialog/share-dialog.component";
-import { DeleteWishListDialogComponent } from "../delete-wish-list-dialog/delete-wish-list-dialog.component";
+import { DeleteItemDialogComponent } from "../delete-item-dialog/delete-item-dialog.component";
 
 
 @Component({
@@ -44,10 +44,19 @@ export class WishListEditComponent implements OnInit {
     )
   }
 
-  deleteWish(id: number) {
-    this.wishService.delete(this.wishList.id, id).subscribe(result => {
-      if (result) this.removeFromList(id)
-    }, error => this.errorMessage = <any>error)
+  deleteWish(wish: Wish) {
+    let deleteDialog = this.dialog.open(DeleteItemDialogComponent, {
+      data: {
+        item: this.getWishText(wish),
+        id: wish.id
+      }
+    });
+
+    deleteDialog.afterClosed().subscribe( dialogRet => {
+      this.wishService.delete(this.wishList.id, dialogRet).subscribe(result => {
+        if (result) this.removeFromList(dialogRet)
+      }, error => this.errorMessage = <any>error)
+    });
   }
 
   removeFromList(id: number) {
@@ -59,9 +68,9 @@ export class WishListEditComponent implements OnInit {
   }
 
   deleteClicked() {
-    let deleteDialog = this.dialog.open(DeleteWishListDialogComponent, {
+    let deleteDialog = this.dialog.open(DeleteItemDialogComponent, {
       data: {
-        event: this.wishList.event,
+        item: this.wishList.event,
         id: this.wishList.id
       }
     });
@@ -85,5 +94,13 @@ export class WishListEditComponent implements OnInit {
     baseUrl = baseUrl.substr(0, endIndex);
     return baseUrl + "?share=" + this.wishList.id;
 
+  }
+
+  private getWishText(wish: Wish) {
+    if (wish.caption) {
+      return wish.caption;
+    }  else {
+      return wish.description;
+    }
   }
 }

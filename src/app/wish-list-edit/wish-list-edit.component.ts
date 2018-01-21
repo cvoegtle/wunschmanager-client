@@ -98,7 +98,7 @@ export class WishListEditComponent implements OnInit {
     let baseUrl = window.location.href
     let endIndex = baseUrl.lastIndexOf('/');
     baseUrl = baseUrl.substr(0, endIndex);
-    return baseUrl + "?share=" + this.wishList.id;
+    return baseUrl + "/?share=" + this.wishList.id;
 
   }
 

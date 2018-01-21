@@ -35,4 +35,13 @@ export class WishEditComponent implements OnInit {
     this.wishChange.emit(this.wish)
   }
 
+  targetUrl() {
+    let url = this.wish.link;
+    if (url != null && url.length > 0 && !url.startsWith("http")) {
+      url = "http://" + url;
+    }
+    return url;
+  }
+
+
 }

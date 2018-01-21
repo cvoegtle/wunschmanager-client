@@ -4,7 +4,7 @@
 }
 
 .wish-form {
-    min-width: 150px;
+    min-width: 250px;
     max-width: 510px;
     width: 100%;
     display: flex;
@@ -14,4 +14,18 @@
 .wish-full-width {
     max-width: 460px;
     width: 100%;
+}
+
+.wish-line {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.wish-item {
+    width: 100%;
+}
+
+.wish-url {
+    flex: 1 1 auto;
 }

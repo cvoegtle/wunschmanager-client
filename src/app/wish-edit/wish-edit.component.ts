@@ -16,6 +16,11 @@ export class WishEditComponent implements OnInit {
   ngOnInit() {
   }
 
+  isUnavailable(): boolean {
+    return (this.wish.donor != null && this.wish.donor.length > 0) || this.wish.invisible;
+  }
+
+
   deleteClicked() {
     this.wishDeleted.emit(this.wish);
   }
@@ -32,6 +37,11 @@ export class WishEditComponent implements OnInit {
 
   onLinkChange(event) {
     this.wish.link =  event.target.value;
+    this.wishChange.emit(this.wish)
+  }
+
+  toggleVisibility() {
+    this.wish.invisible = !this.wish.invisible;
     this.wishChange.emit(this.wish)
   }
 

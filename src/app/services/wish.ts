@@ -4,5 +4,5 @@ export interface Wish {
   description: string;
   link: string;
   donor: string;
-  available: boolean;
+  invisible: boolean;
 }

@@ -52,11 +52,17 @@ export class WishListEditComponent implements OnInit {
       }
     });
 
-    deleteDialog.afterClosed().subscribe( dialogRet => {
-      this.wishService.delete(this.wishList.id, dialogRet).subscribe(result => {
-        if (result) this.removeFromList(dialogRet)
-      }, error => this.errorMessage = <any>error)
+    deleteDialog.afterClosed().subscribe(dialogRet => {
+      if (dialogRet) {
+        this.doDeleteWish(dialogRet);
+      }
     });
+  }
+
+  private doDeleteWish(wishId) {
+    this.wishService.delete(this.wishList.id, wishId).subscribe(result => {
+      if (result) this.removeFromList(wishId)
+    }, error => this.errorMessage = <any>error)
   }
 
   removeFromList(id: number) {
@@ -99,7 +105,7 @@ export class WishListEditComponent implements OnInit {
   private getWishText(wish: Wish) {
     if (wish.caption) {
       return wish.caption;
-    }  else {
+    } else {
       return wish.description;
     }
   }

@@ -1,4 +1,4 @@
-<mat-card class="wish-card ">
+<mat-card [ngClass]="{'wish-card': true, 'unavailable': isUnavailable()}">
   <div class="wish-form">
     <form class="wish-full-width">
       <mat-form-field class="wish-full-width">
@@ -21,6 +21,12 @@
     </form>
     <button mat-icon-button (click)="deleteClicked()" matTooltip="Wunsch löschen">
       <i class="material-icons">delete</i>
+    </button>
+    <button mat-icon-button *ngIf="!wish.invisible" (click)="toggleVisibility()" matTooltip="Wunsch verstecken">
+      <i class="material-icons">visibility_off</i>
+    </button>
+    <button mat-icon-button  *ngIf="wish.invisible" (click)="toggleVisibility()" matTooltip="Wunsch wieder anzeigen">
+      <i class="material-icons">visibility</i>
     </button>
   </div>
 </mat-card>

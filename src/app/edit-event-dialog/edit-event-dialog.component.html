@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Anlass ändern</h1>
+<div mat-dialog-content>
+    <mat-form-field class="edit-event">
+      <input #event_field matInput [(ngModel)]="data.event"/>
+    </mat-form-field>
+    <button mat-button [mat-dialog-close]="data.event" [disabled]="!data.event">ändern</button>
+    <button mat-button (click)="cancelClicked()">verwerfen</button>
+</div>

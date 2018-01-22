@@ -1,7 +1,7 @@
 <mat-expansion-panel (opened)="panelOpened()" color='accent'>
   <mat-expansion-panel-header>
     <mat-panel-title>
-      <span class="event">{{wishList.event}}</span>
+      <span class="event" (click)="editEvent()">{{wishList.event}}</span>
       <span class="managed" *ngIf="wishList.managed">(verwaltet)</span>
     </mat-panel-title>
     <mat-panel-description>

@@ -20,6 +20,12 @@ export class WishListService {
         catchError(this.handleError<WishList[]>('wishlist/list')));
   }
 
+  rename(id: number, event: string): Observable<WishList> {
+    return this.http.get<WishList>(this.getBaseUrl() + '/wishlist/rename?id=' + id + "&event=" + event, httpOptions)
+        .pipe(catchError(this.handleError<WishList>('wishlist/rename')));
+
+  }
+
   share(id: string): Observable<WishList[]> {
     return this.http.get<WishList[]>(this.getBaseUrl() + '/wishlist/share?id=' + id, httpOptions)
         .pipe(catchError(this.handleError<WishList[]>('wishlist/share')));

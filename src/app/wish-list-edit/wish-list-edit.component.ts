@@ -5,6 +5,8 @@ import { WishService } from "../services/wish.service";
 import { MatDialog } from '@angular/material';
 import { ShareDialogComponent } from "../share-dialog/share-dialog.component";
 import { DeleteItemDialogComponent } from "../delete-item-dialog/delete-item-dialog.component";
+import { EditEventDialogComponent } from "../edit-event-dialog/edit-event-dialog.component";
+import { WishListService } from "../services/wish-list.service";
 
 
 @Component({
@@ -19,7 +21,7 @@ export class WishListEditComponent implements OnInit {
   wishes: Wish[];
   errorMessage: string;
 
-  constructor(private wishService: WishService, private dialog: MatDialog) {
+  constructor(private wishService: WishService, private wishListService: WishListService, private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -43,6 +45,26 @@ export class WishListEditComponent implements OnInit {
         }, error => this.errorMessage = <any>error
     )
   }
+
+  editEvent() {
+    let editDialog = this.dialog.open(EditEventDialogComponent, {
+      data: {
+        event: this.wishList.event
+      }
+    });
+
+    editDialog.afterClosed().subscribe( result => {
+      if (result) {
+        this.updateEvent(result);
+      }
+    })
+  }
+
+  updateEvent(newEvent: string) {
+    this.wishListService.rename(this.wishList.id, newEvent).subscribe(result => this.wishList = result,
+        error => this.errorMessage = <any>error);
+  }
+
 
   deleteWish(wish: Wish) {
     let deleteDialog = this.dialog.open(DeleteItemDialogComponent, {

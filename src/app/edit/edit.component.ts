@@ -56,6 +56,12 @@ export class EditComponent implements OnInit {
     this.newListIsManaged = false;
   }
 
+  onUpdateEvent(wishList: WishList) {
+    this.wishListService.rename(wishList.id, wishList.event).subscribe(_ => {},
+        error => this.errorMessage = <any>error);
+  }
+
+
   isCreatePossible(): boolean {
     return this.newWishListEvent.length > 0;
   }

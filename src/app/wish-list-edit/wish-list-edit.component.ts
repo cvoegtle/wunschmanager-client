@@ -17,11 +17,12 @@ import { WishListService } from "../services/wish-list.service";
 export class WishListEditComponent implements OnInit {
   @Input() wishList: WishList;
   @Output() deleted = new EventEmitter<number>();
+  @Output() updated = new EventEmitter<WishList>();
 
   wishes: Wish[];
   errorMessage: string;
 
-  constructor(private wishService: WishService, private wishListService: WishListService, private dialog: MatDialog) {
+  constructor(private wishService: WishService, private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -55,16 +56,11 @@ export class WishListEditComponent implements OnInit {
 
     editDialog.afterClosed().subscribe( result => {
       if (result) {
-        this.updateEvent(result);
+        this.wishList.event = result;
+        this.updated.emit(this.wishList)
       }
     })
   }
-
-  updateEvent(newEvent: string) {
-    this.wishListService.rename(this.wishList.id, newEvent).subscribe(result => this.wishList = result,
-        error => this.errorMessage = <any>error);
-  }
-
 
   deleteWish(wish: Wish) {
     let deleteDialog = this.dialog.open(DeleteItemDialogComponent, {

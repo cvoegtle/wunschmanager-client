@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Wish } from "../services/wish";
+import { MatSnackBar } from "@angular/material";
 
 @Component({
   selector: 'wish-edit',
@@ -11,7 +12,7 @@ export class WishEditComponent implements OnInit {
   @Output() wishDeleted = new EventEmitter<Wish>();
   @Output() wishChange = new EventEmitter<Wish>();
 
-  constructor() { }
+  constructor(private snackBar: MatSnackBar) { }
 
   ngOnInit() {
   }
@@ -42,6 +43,7 @@ export class WishEditComponent implements OnInit {
 
   toggleVisibility() {
     this.wish.invisible = !this.wish.invisible;
+    this.snackBar.open(this.createVisibilityMessage(), null, {duration: 2000});
     this.wishChange.emit(this.wish)
   }
 
@@ -54,4 +56,11 @@ export class WishEditComponent implements OnInit {
   }
 
 
+  private createVisibilityMessage(): string {
+    if (this.wish.invisible) {
+      return "Dieser Wunsch wird nicht mehr angezeigt"
+    } else {
+      return "Dieser Wunsch wird wieder angezeigt"
+    }
+  }
 }

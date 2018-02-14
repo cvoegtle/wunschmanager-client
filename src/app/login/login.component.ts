@@ -29,12 +29,12 @@ export class LoginComponent implements OnInit {
         error => this.errorMessage = <any>error);
   }
 
-  getLoginUrl(): string {
-    return this.userStatus != null ? this.userStatus.url : '';
+  loginClicked() {
+    window.location.href = this.userStatus.url;
   }
 
-  getViewUrl(): string {
-    return "/view/" + this.getUrlParam("share");
+  viewClicked() {
+    this.router.navigate(['/view/' + this.getUrlParam("share")]);
   }
 
 
@@ -48,8 +48,6 @@ export class LoginComponent implements OnInit {
       }
     }
   }
-
-  private
 
   getUrlParam(prop: string) {
     let params = {};

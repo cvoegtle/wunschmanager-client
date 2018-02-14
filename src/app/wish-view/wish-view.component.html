@@ -16,7 +16,7 @@
         <span *ngIf="isMyPresent()">{{wish.donor}}</span>
       </mat-list-item>
     </mat-list>
-    <button *ngIf="isAvailable()" mat-icon-button (click)="reserveClicked()" class="donate-button"
+    <button *ngIf="isAvailable() && !restricted" mat-icon-button (click)="reserveClicked()" class="donate-button"
             matTooltip="{{getTooltip()}}">
       <i *ngIf="!isMyPresent()" class="material-icons">shopping_cart</i>
       <i *ngIf="isMyPresent()" class="material-icons">remove_shopping_cart</i>

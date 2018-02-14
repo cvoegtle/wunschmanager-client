@@ -3,11 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { EditComponent } from "./edit/edit.component";
 import { LoginComponent } from "./login/login.component";
 import { ShareComponent } from "./shared/shared.component";
+import { ViewComponent } from "./view/view.component";
 
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'share/:id', component: ShareComponent},
+  {path: 'view/:id', component: ViewComponent},
   {path: 'edit', component: EditComponent}
 ];
 
@@ -15,5 +17,6 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule {
 }

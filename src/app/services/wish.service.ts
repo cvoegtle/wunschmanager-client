@@ -17,7 +17,7 @@ export class WishService {
   constructor(private http: HttpClient, private configurationService: ConfigurationService) {
   }
 
-  fetchWishes(wishListId: number): Observable<Wish[]> {
+  fetchWishes(wishListId: number | string): Observable<Wish[]> {
     return this.http.get<Wish[]>(this.getBaseUrl() + '/wish/list?list=' + wishListId, httpOptions).pipe(
         catchError(this.handleError<Wish[]>('wish/list')));
   }

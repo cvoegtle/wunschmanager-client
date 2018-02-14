@@ -31,6 +31,7 @@ import { ConfigurationService } from "./services/configuration.service";
 import { DeleteItemDialogComponent } from './delete-item-dialog/delete-item-dialog.component';
 import { NamePartPipe } from './util/name-part.pipe';
 import { EditEventDialogComponent } from './edit-event-dialog/edit-event-dialog.component';
+import { ViewComponent } from './view/view.component';
 
 @NgModule({
   exports: [
@@ -77,7 +78,7 @@ export class WishMaterialModule {
   declarations: [
     AppComponent, EditComponent, WishListEditComponent, WishEditComponent, LoginComponent,
     ShareDialogComponent, WishViewComponent, WishListViewComponent, ShareComponent, AllSharedComponent,
-    DeleteItemDialogComponent, NamePartPipe, EditEventDialogComponent
+    DeleteItemDialogComponent, NamePartPipe, EditEventDialogComponent, ViewComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, FormsModule, BrowserAnimationsModule, WishMaterialModule, MatNativeDateModule,

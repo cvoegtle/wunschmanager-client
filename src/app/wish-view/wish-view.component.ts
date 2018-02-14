@@ -9,6 +9,7 @@ import { Wish } from "../services/wish";
 export class WishViewComponent implements OnInit {
   @Input() wish: Wish;
   @Input() user: string;
+  @Input() restricted: boolean = false;
   @Output() reserved = new EventEmitter<Wish>();
 
   constructor() { }

@@ -1,5 +1,10 @@
 <mat-grid-list cols="1" rowHeight="2:1">
-  <mat-grid-tile><a href="{{getLoginUrl()}}" class="mat-body-2">{{"anmelden"}}</a></mat-grid-tile>
+  <mat-grid-tile>
+    <div class="login-view">
+      <a href="{{getLoginUrl()}}" class="mat-body-2">anmelden</a>
+      <a *ngIf="getUrlParam('share')" href="{{getViewUrl()}}" class="mat-body-2">nur ansehen</a>
+    </div>
+  </mat-grid-tile>
 </mat-grid-list>
 
 

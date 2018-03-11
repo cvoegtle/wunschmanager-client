@@ -1,9 +1,20 @@
 <mat-card [ngClass]="{'wish-card': true, 'unavailable': isUnavailable()}">
   <div class="wish-form">
     <form class="wish-full-width">
-      <mat-form-field class="wish-full-width">
-        <input matInput placeholder="Wunsch" [value]="wish.caption" (change)="onCaptionChange($event)">
-      </mat-form-field>
+      <div class="wish-line">
+        <mat-form-field class="wish-full-width">
+          <input matInput placeholder="Wunsch" [value]="wish.caption" (change)="onCaptionChange($event)">
+        </mat-form-field>
+        <button mat-icon-button (click)="deleteClicked()" matTooltip="Wunsch löschen">
+          <i class="material-icons">delete</i>
+        </button>
+        <button mat-icon-button *ngIf="!wish.invisible" (click)="toggleVisibility()" matTooltip="Wunsch verstecken">
+          <i class="material-icons">visibility_off</i>
+        </button>
+        <button mat-icon-button *ngIf="wish.invisible" (click)="toggleVisibility()" matTooltip="Wunsch wieder anzeigen">
+          <i class="material-icons">visibility</i>
+        </button>
+      </div>
       <mat-form-field class="wish-full-width">
         <textarea matInput placeholder="Beschreibung" [value]="wish.description" matTextareaAutosize
                   (change)="onDescriptionChange($event)" matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
@@ -19,14 +30,5 @@
       </div>
       <a matLine *ngIf="wish.donor" href="mailto:{{wish.donor}}">{{wish.donor}}</a>
     </form>
-    <button mat-icon-button (click)="deleteClicked()" matTooltip="Wunsch löschen">
-      <i class="material-icons">delete</i>
-    </button>
-    <button mat-icon-button *ngIf="!wish.invisible" (click)="toggleVisibility()" matTooltip="Wunsch verstecken">
-      <i class="material-icons">visibility_off</i>
-    </button>
-    <button mat-icon-button  *ngIf="wish.invisible" (click)="toggleVisibility()" matTooltip="Wunsch wieder anzeigen">
-      <i class="material-icons">visibility</i>
-    </button>
   </div>
 </mat-card>

@@ -33,6 +33,7 @@ import { NamePartPipe } from './util/name-part.pipe';
 import { EditEventDialogComponent } from './edit-event-dialog/edit-event-dialog.component';
 import { ViewComponent } from './view/view.component';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
+import { ErrorHandler } from './error-handler/error-handler.component';
 
 @NgModule({
   exports: [
@@ -85,7 +86,7 @@ export class WishMaterialModule {
     BrowserModule, HttpClientModule, FormsModule, BrowserAnimationsModule, WishMaterialModule, MatNativeDateModule,
     ReactiveFormsModule, AppRoutingModule, MatListModule, MatDialogModule
   ],
-  providers: [WishService, WishListService, UserService, ConfigurationService],
+  providers: [WishService, WishListService, UserService, ConfigurationService, ErrorHandler],
   bootstrap: [AppComponent]
 })
 export class AppModule {

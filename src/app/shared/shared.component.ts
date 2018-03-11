@@ -5,8 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { WishList } from '../services/wish-list';
 import { UserStatus } from '../services/user.status';
 import { ConfigurationService } from '../services/configuration.service';
-import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
-import { MatDialog } from '@angular/material';
+import { ErrorHandler } from "../error-handler/error-handler.component";
 
 @Component({
   selector: 'shared-view',
@@ -21,11 +20,12 @@ export class ShareComponent implements OnInit {
               private wishListService: WishListService,
               private router: Router,
               private route: ActivatedRoute,
-              private dialog: MatDialog) { }
+              private errorHandler: ErrorHandler) {
+  }
 
   ngOnInit() {
     if (this.configurationService.isInitialised()) {
-    this.fetchStatus();
+      this.fetchStatus();
     } else {
       this.configurationService.load().subscribe(_ => this.fetchStatus());
     }
@@ -33,7 +33,7 @@ export class ShareComponent implements OnInit {
 
   private fetchStatus() {
     this.userService.fetchStatus().subscribe(status => this.checkStatus(status),
-        _ => this.handleError('fetchStatus'))
+        _ => this.errorHandler.handle('fetchStatus'))
   }
 
   private checkStatus(userStatus: UserStatus) {
@@ -48,15 +48,6 @@ export class ShareComponent implements OnInit {
 
   private fetchSharedWishList(id: string) {
     this.wishListService.share(id).subscribe(wishLists => this.wishLists = wishLists,
-        _ => this.handleError('fetchSharedLists'));
+        _ => this.errorHandler.handle('fetchSharedLists'));
   }
-
-  private handleError(action: string) {
-    this.dialog.open(ErrorDialogComponent, {
-      data: {
-        action: action
-      }
-    });
-  }
-
 }

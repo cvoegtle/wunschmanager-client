@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WishList } from '../services/wish-list';
 import { WishListService } from '../services/wish-list.service';
 import { ConfigurationService } from '../services/configuration.service';
-import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
-import { MatDialog } from '@angular/material';
+import { ErrorHandler } from '../error-handler/error-handler.component';
 
 @Component({
   selector: 'all-shared',
@@ -15,7 +14,7 @@ export class AllSharedComponent implements OnInit {
 
   constructor(private configurationService: ConfigurationService,
               private wishListService: WishListService,
-              private dialog: MatDialog) {
+              private errorHandler: ErrorHandler) {
   }
 
   ngOnInit() {
@@ -28,13 +27,13 @@ export class AllSharedComponent implements OnInit {
 
   private fetchSharedWishLists() {
     this.wishListService.fetchShared().subscribe(wishLists => this.wishLists = wishLists,
-        _ => this.handleError('fetchSharedLists'));
+        _ => this.errorHandler.handle('fetchSharedLists'));
   }
 
   onDeleteList(wishListId: number) {
 
     this.wishListService.unshare(wishListId).subscribe(deleted => this.handleResponse(deleted, wishListId),
-        _ => this.handleError('unshareList'));
+        _ => this.errorHandler.handle('unshareList'));
   }
 
   public handleResponse(deleted: boolean, wishListId) {
@@ -43,13 +42,4 @@ export class AllSharedComponent implements OnInit {
       this.wishLists.splice(index, 1);
     }
   }
-
-  private handleError(action: string) {
-    this.dialog.open(ErrorDialogComponent, {
-      data: {
-        action: action
-      }
-    });
-  }
-
 }

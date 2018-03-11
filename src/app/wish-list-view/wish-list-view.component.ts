@@ -1,11 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Wish } from '../services/wish';
 import { WishList } from '../services/wish-list';
 import { WishService } from '../services/wish.service';
 import { UserService } from '../services/user.service';
 import { UserStatus } from '../services/user.status';
-import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
-import { MatDialog } from '@angular/material';
+import { ErrorHandler } from '../error-handler/error-handler.component';
 
 @Component({
   selector: 'wish-list-view',
@@ -23,15 +22,19 @@ export class WishListViewComponent implements OnInit {
 
   panelOpenState: boolean;
 
-  constructor(private wishService: WishService, private userService: UserService, private dialog: MatDialog ) { }
+  constructor(private wishService: WishService, private userService: UserService, private errorHandler: ErrorHandler) {
+  }
 
   ngOnInit() {
     this.userService.fetchStatus().subscribe(status => this.userStatus = status);
   }
 
   panelOpened() {
-    this.wishService.fetchWishes(this.wishList.id).subscribe(wishes => { this.wishes = wishes; this.panelOpenState = true },
-        _ => this.handleError('fetchWishes'))
+    this.wishService.fetchWishes(this.wishList.id).subscribe(wishes => {
+          this.wishes = wishes;
+          this.panelOpenState = true
+        },
+        _ => this.errorHandler.handle('fetchWishes'))
   }
 
   panelClosed() {
@@ -44,15 +47,6 @@ export class WishListViewComponent implements OnInit {
 
   reserveClicked(wish: Wish) {
     this.wishService.reserve(this.wishList.id, wish.id).subscribe(updatedWish => wish.donor = updatedWish.donor,
-        _ => this.handleError('reserveWish'));
+        _ => this.errorHandler.handle('reserveWish'));
   }
-
-  private handleError(action: string) {
-    this.dialog.open(ErrorDialogComponent, {
-      data: {
-        action: action
-      }
-    });
-  }
-
 }

@@ -1,12 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { WishList } from "../services/wish-list";
+import { WishList } from '../services/wish-list';
 import { Wish } from "../services/wish";
 import { WishService } from "../services/wish.service";
 import { MatDialog } from '@angular/material';
 import { ShareDialogComponent } from "../share-dialog/share-dialog.component";
-import { DeleteItemDialogComponent } from "../delete-item-dialog/delete-item-dialog.component";
-import { EditEventDialogComponent } from "../edit-event-dialog/edit-event-dialog.component";
+import { DeleteItemDialogComponent } from '../delete-item-dialog/delete-item-dialog.component';
+import { EditEventDialogComponent } from '../edit-event-dialog/edit-event-dialog.component';
 import { ErrorDialogComponent } from "../error-dialog/error-dialog.component";
+import { ErrorHandler } from "../error-handler/error-handler.component";
 
 
 @Component({
@@ -22,7 +23,7 @@ export class WishListEditComponent implements OnInit {
   wishes: Wish[];
   panelOpenState: boolean;
 
-  constructor(private wishService: WishService, private dialog: MatDialog) {
+  constructor(private wishService: WishService, private dialog: MatDialog, private errorHandler: ErrorHandler) {
   }
 
   ngOnInit() {
@@ -33,7 +34,7 @@ export class WishListEditComponent implements OnInit {
           this.wishes = wishes;
           this.panelOpenState = true
         },
-        _ => this.handleError('fetchWishes'))
+        _ => this.errorHandler.handle('fetchWishes'))
   }
 
   panelClosed() {
@@ -42,7 +43,7 @@ export class WishListEditComponent implements OnInit {
 
   addWish() {
     this.wishService.add(this.wishList.id).subscribe(wish => this.wishes.push(wish),
-        _ => this.handleError('addWish'))
+        _ => this.errorHandler.handle('addWish'))
   }
 
   wishChanged(wish: Wish) {
@@ -50,7 +51,7 @@ export class WishListEditComponent implements OnInit {
           if (!result) {
             alert('Update fehlgeschlagen')
           }
-        }, _ => this.handleError('updateWish')
+        }, _ => this.errorHandler.handle('updateWish')
     )
   }
 
@@ -87,7 +88,7 @@ export class WishListEditComponent implements OnInit {
   private doDeleteWish(wishId) {
     this.wishService.delete(this.wishList.id, wishId).subscribe(result => {
       if (result) this.removeFromList(wishId)
-    }, _ => this.handleError('deleteWish'))
+    }, _ => this.errorHandler.handle('deleteWish'))
   }
 
   removeFromList(id: number) {
@@ -135,11 +136,4 @@ export class WishListEditComponent implements OnInit {
     }
   }
 
-  private handleError(action: string) {
-    this.dialog.open(ErrorDialogComponent, {
-      data: {
-        action: action
-      }
-    });
-  }
 }

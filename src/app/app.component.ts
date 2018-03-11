@@ -1,24 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from "./services/user.service";
-import { UserStatus } from "./services/user.status";
-import { ActivatedRoute, Router } from "@angular/router";
-import { ConfigurationService } from "./services/configuration.service";
-import { MatDialog } from '@angular/material';
-import { ErrorDialogComponent } from "./error-dialog/error-dialog.component";
+import { UserService } from './services/user.service';
+import { UserStatus } from './services/user.status';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ConfigurationService } from './services/configuration.service';
+import { ErrorHandler } from './error-handler/error-handler.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent  implements OnInit {
+export class AppComponent implements OnInit {
   userStatus: UserStatus;
 
   constructor(private configurationService: ConfigurationService,
               private userService: UserService,
               private route: ActivatedRoute,
               private router: Router,
-              private dialog: MatDialog) {
+              private errorHandler: ErrorHandler) {
   }
 
   ngOnInit(): void {
@@ -31,7 +30,7 @@ export class AppComponent  implements OnInit {
 
   private fetchStatus() {
     return this.userService.fetchStatus().subscribe(status => this.userStatus = status,
-        _ => this.handleError('fetchStatus'));
+        _ => this.errorHandler.handle('fetchStatus'));
   }
 
   isAwayFromHome() {
@@ -50,14 +49,5 @@ export class AppComponent  implements OnInit {
 
   isLoggedIn(): boolean {
     return this.userStatus != null && this.userStatus.loggedIn;
-  }
-
-  private handleError(action: string) {
-    this.dialog.open(ErrorDialogComponent, {
-      data: {
-        action: action
-      }
-    });
-
   }
 }

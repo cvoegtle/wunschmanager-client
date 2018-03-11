@@ -3,7 +3,6 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
 import { catchError } from "rxjs/operators";
 import { UserStatus } from "./user.status";
-import { of } from "rxjs/observable/of";
 import { ConfigurationService } from "./configuration.service";
 
 const httpOptions = {
@@ -36,9 +35,7 @@ export class UserService {
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-
       console.error(error); // log to console instead
-
       return null;
     };
   }

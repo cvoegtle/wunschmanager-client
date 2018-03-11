@@ -5,8 +5,7 @@ import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { UserStatus } from "../services/user.status";
 import { ConfigurationService } from '../services/configuration.service';
-import { ErrorDialogComponent } from "../error-dialog/error-dialog.component";
-import { MatDialog } from '@angular/material';
+import { ErrorHandler } from '../error-handler/error-handler.component';
 
 @Component({
   selector: 'wish-editor',
@@ -22,7 +21,7 @@ export class EditComponent implements OnInit {
               private userService: UserService,
               private wishListService: WishListService,
               private router: Router,
-              private dialog: MatDialog) {
+              private errorHandler: ErrorHandler) {
   }
 
   ngOnInit() {
@@ -35,7 +34,7 @@ export class EditComponent implements OnInit {
 
   private fetchStatus() {
     this.userService.fetchStatus().subscribe(status => this.checkStatus(status),
-        _ => this.handleError('fetchStatus'))
+        _ => this.errorHandler.handle('fetchStatus'))
   }
 
   private checkStatus(userStatus: UserStatus) {
@@ -48,19 +47,20 @@ export class EditComponent implements OnInit {
 
   private fetchWishLists(): void {
     this.wishListService.fetch().subscribe(wishLists => this.wishLists = wishLists,
-        _ => this.handleError('fetchLists'));
+        _ => this.errorHandler.handle('fetchLists'));
   }
 
   createWishList() {
     this.wishListService.create(this.newWishListEvent, this.newListIsManaged)
-        .subscribe(wishList => this.wishLists.push(wishList), _ => this.handleError('createList'));
+        .subscribe(wishList => this.wishLists.push(wishList), _ => this.errorHandler.handle('createList'));
     this.newWishListEvent = '';
     this.newListIsManaged = false;
   }
 
   onUpdateEvent(wishList: WishList) {
-    this.wishListService.rename(wishList.id, wishList.event).subscribe(_ => {},
-        _ => this.handleError('renameList'));
+    this.wishListService.rename(wishList.id, wishList.event).subscribe(_ => {
+        },
+        _ => this.errorHandler.handle('renameList'));
   }
 
 
@@ -71,7 +71,7 @@ export class EditComponent implements OnInit {
   onDeleteList(id: number) {
     this.wishListService.delete(id).subscribe(result => {
       if (result) this.removeFromList(id)
-    }, _ => this.handleError('deleteList'));
+    }, _ => this.errorHandler.handle('deleteList'));
   }
 
   removeFromList(id: number) {
@@ -80,14 +80,6 @@ export class EditComponent implements OnInit {
         this.wishLists.splice(index, 1);
       }
     }
-  }
-
-  private handleError(action: string) {
-    this.dialog.open(ErrorDialogComponent, {
-      data: {
-        action: action
-      }
-    });
   }
 
 }

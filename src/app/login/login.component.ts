@@ -3,8 +3,8 @@ import { UserStatus } from '../services/user.status';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { ConfigurationService } from '../services/configuration.service';
-import { MatDialog } from '@angular/material';
-import { ErrorDialogComponent } from "../error-dialog/error-dialog.component";
+import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
+import { ErrorHandler } from "../error-handler/error-handler.component";
 
 @Component({
   selector: 'app-login',
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   constructor(private configurationService: ConfigurationService,
               private userService: UserService,
               private router: Router,
-              private dialog: MatDialog) {
+              private errorHandler: ErrorHandler) {
   }
 
   ngOnInit() {
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
 
   private fetchStatus() {
     this.userService.fetchStatus().subscribe(status => this.updateStatus(status),
-        _ => this.handleError('fetchStatus'));
+        _ => this.errorHandler.handle('fetchStatus'));
   }
 
   loginClicked() {
@@ -65,13 +65,4 @@ export class LoginComponent implements OnInit {
 
     return (prop in params) ? params[prop] : null;
   }
-
-  private handleError(action: string) {
-    this.dialog.open(ErrorDialogComponent, {
-      data: {
-        action: action
-      }
-    });
-  }
-
 }

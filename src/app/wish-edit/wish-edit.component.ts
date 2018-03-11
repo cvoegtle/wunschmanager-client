@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Wish } from "../services/wish";
 import { MatSnackBar } from "@angular/material";
+import { makeValidUrl } from "../util/url-helper";
 
 @Component({
   selector: 'wish-edit',
@@ -12,7 +13,8 @@ export class WishEditComponent implements OnInit {
   @Output() wishDeleted = new EventEmitter<Wish>();
   @Output() wishChange = new EventEmitter<Wish>();
 
-  constructor(private snackBar: MatSnackBar) { }
+  constructor(private snackBar: MatSnackBar) {
+  }
 
   ngOnInit() {
   }
@@ -27,17 +29,17 @@ export class WishEditComponent implements OnInit {
   }
 
   onCaptionChange(event) {
-    this.wish.caption =  event.target.value;
+    this.wish.caption = event.target.value;
     this.wishChange.emit(this.wish)
   }
 
   onDescriptionChange(event) {
-    this.wish.description =  event.target.value;
+    this.wish.description = event.target.value;
     this.wishChange.emit(this.wish)
   }
 
   onLinkChange(event) {
-    this.wish.link =  event.target.value;
+    this.wish.link = event.target.value;
     this.wishChange.emit(this.wish)
   }
 
@@ -48,11 +50,7 @@ export class WishEditComponent implements OnInit {
   }
 
   targetUrl() {
-    let url = this.wish.link;
-    if (url != null && url.length > 0 && !url.startsWith("http")) {
-      url = "http://" + url;
-    }
-    return url;
+    return makeValidUrl(this.wish.link);
   }
 
 

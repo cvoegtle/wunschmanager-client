@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Wish } from "../services/wish";
+import { makeValidUrl } from "../util/url-helper";
 
 @Component({
   selector: 'app-wish-view',
@@ -12,7 +13,8 @@ export class WishViewComponent implements OnInit {
   @Input() restricted: boolean = false;
   @Output() reserved = new EventEmitter<Wish>();
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
@@ -38,11 +40,7 @@ export class WishViewComponent implements OnInit {
   }
 
   targetUrl() {
-    let url = this.wish.link;
-    if (url != null && url.length > 0 && !url.startsWith("http")) {
-      url = "http://" + url;
-    }
-    return url;
+    return makeValidUrl(this.wish.link);
   }
 
 }

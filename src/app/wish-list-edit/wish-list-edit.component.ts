@@ -6,7 +6,6 @@ import { MatDialog } from '@angular/material';
 import { ShareDialogComponent } from "../share-dialog/share-dialog.component";
 import { DeleteItemDialogComponent } from "../delete-item-dialog/delete-item-dialog.component";
 import { EditEventDialogComponent } from "../edit-event-dialog/edit-event-dialog.component";
-import { WishListService } from "../services/wish-list.service";
 import { ErrorDialogComponent } from "../error-dialog/error-dialog.component";
 
 
@@ -21,6 +20,7 @@ export class WishListEditComponent implements OnInit {
   @Output() updated = new EventEmitter<WishList>();
 
   wishes: Wish[];
+  panelOpenState: boolean;
 
   constructor(private wishService: WishService, private dialog: MatDialog) {
   }
@@ -29,8 +29,15 @@ export class WishListEditComponent implements OnInit {
   }
 
   panelOpened() {
-    this.wishService.fetchWishes(this.wishList.id).subscribe(wishes => this.wishes = wishes,
+    this.wishService.fetchWishes(this.wishList.id).subscribe(wishes => {
+          this.wishes = wishes;
+          this.panelOpenState = true
+        },
         _ => this.handleError('fetchWishes'))
+  }
+
+  panelClosed() {
+    this.panelOpenState = false;
   }
 
   addWish() {
@@ -54,7 +61,7 @@ export class WishListEditComponent implements OnInit {
       }
     });
 
-    editDialog.afterClosed().subscribe( result => {
+    editDialog.afterClosed().subscribe(result => {
       if (result) {
         this.wishList.event = result;
         this.updated.emit(this.wishList)

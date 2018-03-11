@@ -1,4 +1,4 @@
-<mat-expansion-panel (opened)="panelOpened()" color='accent'>
+<mat-expansion-panel (opened)="panelOpened()" (closed)="panelClosed()" [ngClass]="{'open-list': panelOpenState}">
   <mat-expansion-panel-header>
     <mat-panel-title>
       <span class="event" (click)="editEvent()">{{wishList.event}}</span>
@@ -19,7 +19,5 @@
   </mat-expansion-panel-header>
   <wish-edit *ngFor="let wish of wishes" [wish]="wish" (wishDeleted)="deleteWish($event)"
              (wishChange)="wishChanged($event)"></wish-edit>
-  <mat-action-row>
-    <button (click)="addWish()" mat-fab matTooltip="Wunsch hinzufügen" class="add-button">+</button>
-  </mat-action-row>
+  <button (click)="addWish()" mat-fab matTooltip="Wunsch hinzufügen" class="add-button">+</button>
 </mat-expansion-panel>

@@ -1,9 +1,15 @@
+mat-expansion-panel {
+    margin-top: 4px;
+}
+
 .filler {
     flex: 1 1 auto;
 }
 
 .add-button {
-    margin-top: 5px;
+    float: right;
+    right: 5px;
+    bottom: 60px;
 }
 
 .event {
@@ -15,4 +21,8 @@
     margin-top: 10px;
     margin-left: 5px;
     color: grey;
+}
+
+.open-list {
+    background: lightblue;
 }

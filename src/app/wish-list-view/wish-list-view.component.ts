@@ -21,6 +21,8 @@ export class WishListViewComponent implements OnInit {
   wishes: Wish[];
   private userStatus: UserStatus;
 
+  panelOpenState: boolean;
+
   constructor(private wishService: WishService, private userService: UserService, private dialog: MatDialog ) { }
 
   ngOnInit() {
@@ -28,8 +30,12 @@ export class WishListViewComponent implements OnInit {
   }
 
   panelOpened() {
-    this.wishService.fetchWishes(this.wishList.id).subscribe(wishes => this.wishes = wishes,
+    this.wishService.fetchWishes(this.wishList.id).subscribe(wishes => { this.wishes = wishes; this.panelOpenState = true },
         _ => this.handleError('fetchWishes'))
+  }
+
+  panelClosed() {
+    this.panelOpenState = false;
   }
 
   deleteClicked() {

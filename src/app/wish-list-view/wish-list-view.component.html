@@ -1,4 +1,4 @@
-<mat-expansion-panel (opened)="panelOpened()" color='accent'>
+<mat-expansion-panel (opened)="panelOpened()" (closed)="panelClosed()" [ngClass]="{'open-list': panelOpenState}">
   <mat-expansion-panel-header>
     <mat-panel-title>
       <span class="event">{{wishList.event}}</span>

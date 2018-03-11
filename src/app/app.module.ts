@@ -32,6 +32,7 @@ import { DeleteItemDialogComponent } from './delete-item-dialog/delete-item-dial
 import { NamePartPipe } from './util/name-part.pipe';
 import { EditEventDialogComponent } from './edit-event-dialog/edit-event-dialog.component';
 import { ViewComponent } from './view/view.component';
+import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 
 @NgModule({
   exports: [
@@ -74,11 +75,11 @@ export class WishMaterialModule {
 }
 
 @NgModule({
-  entryComponents: [ShareDialogComponent, DeleteItemDialogComponent, EditEventDialogComponent],
+  entryComponents: [ShareDialogComponent, DeleteItemDialogComponent, EditEventDialogComponent, ErrorDialogComponent],
   declarations: [
     AppComponent, EditComponent, WishListEditComponent, WishEditComponent, LoginComponent,
     ShareDialogComponent, WishViewComponent, WishListViewComponent, ShareComponent, AllSharedComponent,
-    DeleteItemDialogComponent, NamePartPipe, EditEventDialogComponent, ViewComponent
+    DeleteItemDialogComponent, NamePartPipe, EditEventDialogComponent, ViewComponent, ErrorDialogComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, FormsModule, BrowserAnimationsModule, WishMaterialModule, MatNativeDateModule,

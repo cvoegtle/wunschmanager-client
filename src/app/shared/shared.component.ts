@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from "../services/user.service";
-import { WishListService } from "../services/wish-list.service";
-import { ActivatedRoute, Router } from "@angular/router";
-import { WishList } from "../services/wish-list";
-import { UserStatus } from "../services/user.status";
-import { ConfigurationService } from "../services/configuration.service";
+import { UserService } from '../services/user.service';
+import { WishListService } from '../services/wish-list.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { WishList } from '../services/wish-list';
+import { UserStatus } from '../services/user.status';
+import { ConfigurationService } from '../services/configuration.service';
+import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'shared-view',
@@ -13,13 +15,13 @@ import { ConfigurationService } from "../services/configuration.service";
 })
 export class ShareComponent implements OnInit {
   wishLists: WishList[];
-  errorMessage: string;
 
   constructor(private configurationService: ConfigurationService,
               private userService: UserService,
               private wishListService: WishListService,
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private dialog: MatDialog) { }
 
   ngOnInit() {
     if (this.configurationService.isInitialised()) {
@@ -31,7 +33,7 @@ export class ShareComponent implements OnInit {
 
   private fetchStatus() {
     this.userService.fetchStatus().subscribe(status => this.checkStatus(status),
-        error => this.errorMessage = <any>error)
+        _ => this.handleError('fetchStatus'))
   }
 
   private checkStatus(userStatus: UserStatus) {
@@ -46,6 +48,15 @@ export class ShareComponent implements OnInit {
 
   private fetchSharedWishList(id: string) {
     this.wishListService.share(id).subscribe(wishLists => this.wishLists = wishLists,
-        error => this.errorMessage = <any>error);
+        _ => this.handleError('fetchSharedLists'));
   }
+
+  private handleError(action: string) {
+    this.dialog.open(ErrorDialogComponent, {
+      data: {
+        action: action
+      }
+    });
+  }
+
 }

@@ -3,6 +3,8 @@ import { ActivatedRoute } from "@angular/router";
 import { ConfigurationService } from "../services/configuration.service";
 import { WishListService } from "../services/wish-list.service";
 import { WishList } from "../services/wish-list";
+import { MatDialog } from '@angular/material';
+import { ErrorDialogComponent } from "../error-dialog/error-dialog.component";
 
 @Component({
   selector: 'app-view',
@@ -11,11 +13,11 @@ import { WishList } from "../services/wish-list";
 })
 export class ViewComponent implements OnInit {
   wishList: WishList;
-  errorMessage: string;
 
   constructor(private configurationService: ConfigurationService,
               private wishListService: WishListService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private dialog: MatDialog ) {
   }
 
   ngOnInit() {
@@ -29,8 +31,15 @@ export class ViewComponent implements OnInit {
   fetchWishList() {
     const id = this.route.snapshot.paramMap.get('id');
     this.wishListService.get(id).subscribe(wishList => this.wishList = wishList,
-        error => this.errorMessage = <any>error)
+        _ => this.handleError('fetchLists'))
   }
 
+  private handleError(action: string) {
+    this.dialog.open(ErrorDialogComponent, {
+      data: {
+        action: action
+      }
+    });
+  }
 
 }

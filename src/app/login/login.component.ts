@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { UserStatus } from "../services/user.status";
-import { UserService } from "../services/user.service";
-import { Router } from "@angular/router";
-import { ConfigurationService } from "../services/configuration.service";
+import { UserStatus } from '../services/user.status';
+import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
+import { ConfigurationService } from '../services/configuration.service';
+import { MatDialog } from '@angular/material';
+import { ErrorDialogComponent } from "../error-dialog/error-dialog.component";
 
 @Component({
   selector: 'app-login',
@@ -11,9 +13,11 @@ import { ConfigurationService } from "../services/configuration.service";
 })
 export class LoginComponent implements OnInit {
   userStatus: UserStatus;
-  private errorMessage: String;
 
-  constructor(private configurationService: ConfigurationService, private userService: UserService, private router: Router) {
+  constructor(private configurationService: ConfigurationService,
+              private userService: UserService,
+              private router: Router,
+              private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -26,7 +30,7 @@ export class LoginComponent implements OnInit {
 
   private fetchStatus() {
     this.userService.fetchStatus().subscribe(status => this.updateStatus(status),
-        error => this.errorMessage = <any>error);
+        _ => this.handleError('fetchStatus'));
   }
 
   loginClicked() {
@@ -34,15 +38,15 @@ export class LoginComponent implements OnInit {
   }
 
   viewClicked() {
-    this.router.navigate(['/view/' + this.getUrlParam("share")]);
+    this.router.navigate(['/view/' + this.getUrlParam('share')]);
   }
 
 
   updateStatus(status: UserStatus) {
     this.userStatus = status;
     if (status != null && status.loggedIn) {
-      if (this.getUrlParam("share")) {
-        this.router.navigate(['/share/' + this.getUrlParam("share")]);
+      if (this.getUrlParam('share')) {
+        this.router.navigate(['/share/' + this.getUrlParam('share')]);
       } else {
         this.router.navigate(['/edit']);
       }
@@ -61,4 +65,13 @@ export class LoginComponent implements OnInit {
 
     return (prop in params) ? params[prop] : null;
   }
+
+  private handleError(action: string) {
+    this.dialog.open(ErrorDialogComponent, {
+      data: {
+        action: action
+      }
+    });
+  }
+
 }

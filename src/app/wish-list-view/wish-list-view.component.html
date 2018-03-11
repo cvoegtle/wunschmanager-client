@@ -15,4 +15,3 @@
   <app-wish-view *ngFor="let wish of wishes" [wish]="wish" [user]="userStatus.name" [restricted]="restricted"
                  (reserved)="reserveClicked($event)"></app-wish-view>
 </mat-expansion-panel>
-<p>{{errorMessage}}</p>

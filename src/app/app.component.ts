@@ -3,20 +3,22 @@ import { UserService } from "./services/user.service";
 import { UserStatus } from "./services/user.status";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ConfigurationService } from "./services/configuration.service";
+import { MatDialog } from '@angular/material';
+import { ErrorDialogComponent } from "./error-dialog/error-dialog.component";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent  implements OnInit{
+export class AppComponent  implements OnInit {
   userStatus: UserStatus;
-  errorMessage: string;
 
   constructor(private configurationService: ConfigurationService,
               private userService: UserService,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -29,7 +31,7 @@ export class AppComponent  implements OnInit{
 
   private fetchStatus() {
     return this.userService.fetchStatus().subscribe(status => this.userStatus = status,
-        error => this.errorMessage = <any>error);
+        _ => this.handleError('fetchStatus'));
   }
 
   isAwayFromHome() {
@@ -48,5 +50,14 @@ export class AppComponent  implements OnInit{
 
   isLoggedIn(): boolean {
     return this.userStatus != null && this.userStatus.loggedIn;
+  }
+
+  private handleError(action: string) {
+    this.dialog.open(ErrorDialogComponent, {
+      data: {
+        action: action
+      }
+    });
+
   }
 }

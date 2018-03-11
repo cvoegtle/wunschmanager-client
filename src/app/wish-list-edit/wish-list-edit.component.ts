@@ -7,6 +7,7 @@ import { ShareDialogComponent } from "../share-dialog/share-dialog.component";
 import { DeleteItemDialogComponent } from "../delete-item-dialog/delete-item-dialog.component";
 import { EditEventDialogComponent } from "../edit-event-dialog/edit-event-dialog.component";
 import { WishListService } from "../services/wish-list.service";
+import { ErrorDialogComponent } from "../error-dialog/error-dialog.component";
 
 
 @Component({
@@ -20,7 +21,6 @@ export class WishListEditComponent implements OnInit {
   @Output() updated = new EventEmitter<WishList>();
 
   wishes: Wish[];
-  errorMessage: string;
 
   constructor(private wishService: WishService, private dialog: MatDialog) {
   }
@@ -30,20 +30,20 @@ export class WishListEditComponent implements OnInit {
 
   panelOpened() {
     this.wishService.fetchWishes(this.wishList.id).subscribe(wishes => this.wishes = wishes,
-        error => this.errorMessage = <any>error)
+        _ => this.handleError('fetchWishes'))
   }
 
   addWish() {
     this.wishService.add(this.wishList.id).subscribe(wish => this.wishes.push(wish),
-        error => this.errorMessage = <any>error)
+        _ => this.handleError('addWish'))
   }
 
   wishChanged(wish: Wish) {
     this.wishService.update(this.wishList.id, wish).subscribe(result => {
           if (!result) {
-            alert("Update fehlgeschlagen")
+            alert('Update fehlgeschlagen')
           }
-        }, error => this.errorMessage = <any>error
+        }, _ => this.handleError('updateWish')
     )
   }
 
@@ -80,7 +80,7 @@ export class WishListEditComponent implements OnInit {
   private doDeleteWish(wishId) {
     this.wishService.delete(this.wishList.id, wishId).subscribe(result => {
       if (result) this.removeFromList(wishId)
-    }, error => this.errorMessage = <any>error)
+    }, _ => this.handleError('deleteWish'))
   }
 
   removeFromList(id: number) {
@@ -116,7 +116,7 @@ export class WishListEditComponent implements OnInit {
     let baseUrl = window.location.href
     let endIndex = baseUrl.lastIndexOf('/');
     baseUrl = baseUrl.substr(0, endIndex);
-    return baseUrl + "/?share=" + this.wishList.id;
+    return baseUrl + '/?share=' + this.wishList.id;
 
   }
 
@@ -126,5 +126,13 @@ export class WishListEditComponent implements OnInit {
     } else {
       return wish.description;
     }
+  }
+
+  private handleError(action: string) {
+    this.dialog.open(ErrorDialogComponent, {
+      data: {
+        action: action
+      }
+    });
   }
 }

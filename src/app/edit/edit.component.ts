@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { WishList } from "../services/wish-list";
-import { WishListService } from "../services/wish-list.service";
-import { UserService } from "../services/user.service";
-import { Router } from "@angular/router";
+import { WishList } from '../services/wish-list';
+import { WishListService } from '../services/wish-list.service';
+import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
 import { UserStatus } from "../services/user.status";
-import { ConfigurationService } from "../services/configuration.service";
+import { ConfigurationService } from '../services/configuration.service';
+import { ErrorDialogComponent } from "../error-dialog/error-dialog.component";
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'wish-editor',
@@ -14,13 +16,13 @@ import { ConfigurationService } from "../services/configuration.service";
 export class EditComponent implements OnInit {
   wishLists: WishList[];
   public newWishListEvent: string = "";
-  public newListIsManaged:boolean = false;
-  errorMessage: string;
+  public newListIsManaged: boolean = false;
 
   constructor(private configurationService: ConfigurationService,
               private userService: UserService,
               private wishListService: WishListService,
-              private router: Router) {
+              private router: Router,
+              private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -33,7 +35,7 @@ export class EditComponent implements OnInit {
 
   private fetchStatus() {
     this.userService.fetchStatus().subscribe(status => this.checkStatus(status),
-        error => this.errorMessage = <any>error)
+        _ => this.handleError('fetchStatus'))
   }
 
   private checkStatus(userStatus: UserStatus) {
@@ -46,19 +48,19 @@ export class EditComponent implements OnInit {
 
   private fetchWishLists(): void {
     this.wishListService.fetch().subscribe(wishLists => this.wishLists = wishLists,
-        error => this.errorMessage = <any>error);
+        _ => this.handleError('fetchLists'));
   }
 
   createWishList() {
-    this.wishListService.create(this.newWishListEvent, this.newListIsManaged).
-    subscribe(wishList => this.wishLists.push(wishList), error => this.errorMessage = <any>error);
-    this.newWishListEvent = "";
+    this.wishListService.create(this.newWishListEvent, this.newListIsManaged)
+        .subscribe(wishList => this.wishLists.push(wishList), _ => this.handleError('createList'));
+    this.newWishListEvent = '';
     this.newListIsManaged = false;
   }
 
   onUpdateEvent(wishList: WishList) {
     this.wishListService.rename(wishList.id, wishList.event).subscribe(_ => {},
-        error => this.errorMessage = <any>error);
+        _ => this.handleError('renameList'));
   }
 
 
@@ -69,7 +71,7 @@ export class EditComponent implements OnInit {
   onDeleteList(id: number) {
     this.wishListService.delete(id).subscribe(result => {
       if (result) this.removeFromList(id)
-    }, error => this.errorMessage = <any>error);
+    }, _ => this.handleError('deleteList'));
   }
 
   removeFromList(id: number) {
@@ -78,6 +80,14 @@ export class EditComponent implements OnInit {
         this.wishLists.splice(index, 1);
       }
     }
+  }
+
+  private handleError(action: string) {
+    this.dialog.open(ErrorDialogComponent, {
+      data: {
+        action: action
+      }
+    });
   }
 
 }

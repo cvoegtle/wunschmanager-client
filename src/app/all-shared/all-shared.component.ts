@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { WishList } from "../services/wish-list";
-import { WishListService } from "../services/wish-list.service";
-import { ConfigurationService } from "../services/configuration.service";
+import { WishList } from '../services/wish-list';
+import { WishListService } from '../services/wish-list.service';
+import { ConfigurationService } from '../services/configuration.service';
+import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'all-shared',
@@ -10,13 +12,15 @@ import { ConfigurationService } from "../services/configuration.service";
 })
 export class AllSharedComponent implements OnInit {
   wishLists: WishList[];
-  errorMessage: string;
 
-  constructor(private configurationService: ConfigurationService, private wishListService: WishListService) { }
+  constructor(private configurationService: ConfigurationService,
+              private wishListService: WishListService,
+              private dialog: MatDialog) {
+  }
 
   ngOnInit() {
     if (this.configurationService.isInitialised()) {
-    this.fetchSharedWishLists();
+      this.fetchSharedWishLists();
     } else {
       this.configurationService.load().subscribe(_ => this.fetchSharedWishLists());
     }
@@ -24,13 +28,13 @@ export class AllSharedComponent implements OnInit {
 
   private fetchSharedWishLists() {
     this.wishListService.fetchShared().subscribe(wishLists => this.wishLists = wishLists,
-        error => this.errorMessage = <any>error);
+        _ => this.handleError('fetchSharedLists'));
   }
 
   onDeleteList(wishListId: number) {
 
     this.wishListService.unshare(wishListId).subscribe(deleted => this.handleResponse(deleted, wishListId),
-        error => this.errorMessage = <any>error);
+        _ => this.handleError('unshareList'));
   }
 
   public handleResponse(deleted: boolean, wishListId) {
@@ -40,5 +44,12 @@ export class AllSharedComponent implements OnInit {
     }
   }
 
+  private handleError(action: string) {
+    this.dialog.open(ErrorDialogComponent, {
+      data: {
+        action: action
+      }
+    });
+  }
 
 }

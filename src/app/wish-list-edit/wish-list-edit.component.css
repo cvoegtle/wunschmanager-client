@@ -8,8 +8,8 @@ mat-expansion-panel {
 
 .add-button {
     float: right;
-    right: 5px;
-    bottom: 60px;
+    right: -20px;
+    bottom: 43px;
 }
 
 .event {

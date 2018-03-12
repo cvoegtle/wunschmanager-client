@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EditComponent } from "./edit/edit.component";
 import { LoginComponent } from "./login/login.component";
-import { ShareComponent } from "./shared/shared.component";
+import { ShareComponent } from "./share/shared.component";
 import { ViewComponent } from "./view/view.component";
 
 

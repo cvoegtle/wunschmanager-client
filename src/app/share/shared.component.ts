@@ -8,9 +8,9 @@ import { ConfigurationService } from '../services/configuration.service';
 import { ErrorHandler } from "../error-handler/error-handler.component";
 
 @Component({
-  selector: 'shared-view',
-  templateUrl: './shared.component.html',
-  styleUrls: ['./shared.component.css']
+  selector: 'share-view',
+  templateUrl: './share.component.html',
+  styleUrls: ['./share.component.css']
 })
 export class ShareComponent implements OnInit {
   wishLists: WishList[];

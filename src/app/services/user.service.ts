@@ -18,7 +18,7 @@ export class UserService {
 
   fetchStatus(): Observable<UserStatus> {
     if (this.lastUserStatus == null) {
-      this.lastUserStatus = this.http.get<UserStatus>(this.getBaseUrl() + '/user/status?startUrl=' + this.getApplicationUrl(), httpOptions).pipe(
+      this.lastUserStatus = this.http.get<UserStatus>(`${this.getBaseUrl()}/user/status?startUrl=${this.getApplicationUrl()}&unique=${new Date()}`, httpOptions).pipe(
           catchError(this.handleError<UserStatus>('user/status')));
     }
     return this.lastUserStatus
@@ -33,7 +33,7 @@ export class UserService {
     this.lastUserStatus = null;
   }
 
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error); // log to console instead
       return null;

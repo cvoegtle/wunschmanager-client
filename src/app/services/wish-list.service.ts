@@ -5,6 +5,7 @@ import { HttpClient } from "@angular/common/http";
 import { catchError } from 'rxjs/operators';
 import { of } from "rxjs/observable/of";
 import { ConfigurationService } from "./configuration.service";
+import { unique } from "../util/url-helper";
 
 const httpOptions = {
   withCredentials: true
@@ -16,44 +17,44 @@ export class WishListService {
   }
 
   fetch(): Observable<WishList[]> {
-    return this.http.get<WishList[]>(this.getBaseUrl() + '/wishlist/list', httpOptions).pipe(
+    return this.http.get<WishList[]>(`${this.getBaseUrl()}/wishlist/list?unique=${unique()}`, httpOptions).pipe(
         catchError(this.handleError<WishList[]>('wishlist/list')));
   }
 
   get(id: string): Observable<WishList> {
-    return this.http.get<WishList>(this.getBaseUrl() + '/wishlist/get?id=' + id, httpOptions).pipe(
+    return this.http.get<WishList>(`${this.getBaseUrl()}/wishlist/get?id=${id}&unique=${unique()}`, httpOptions).pipe(
         catchError(this.handleError<WishList>('wishlist/get')));
   }
 
 
   rename(id: number, event: string): Observable<WishList> {
-    return this.http.get<WishList>(this.getBaseUrl() + '/wishlist/rename?id=' + id + "&event=" + event, httpOptions)
+    return this.http.get<WishList>(`${this.getBaseUrl()}/wishlist/rename?id=${id}&event=${event}&unique=${unique()}`, httpOptions)
         .pipe(catchError(this.handleError<WishList>('wishlist/rename')));
 
   }
 
   share(id: string): Observable<WishList[]> {
-    return this.http.get<WishList[]>(this.getBaseUrl() + '/wishlist/share?id=' + id, httpOptions)
+    return this.http.get<WishList[]>(`${this.getBaseUrl()}/wishlist/share?id=${id}&unique=${unique()}`, httpOptions)
         .pipe(catchError(this.handleError<WishList[]>('wishlist/share')));
   }
 
   unshare(id: number): Observable<boolean> {
-    return this.http.get<boolean>(this.getBaseUrl() + '/wishlist/unshare?id=' + id, httpOptions)
+    return this.http.get<boolean>(`${this.getBaseUrl()}/wishlist/unshare?id=${id}&unique=${unique()}`, httpOptions)
         .pipe(catchError(this.handleError<boolean>('wishlist/unshare')));
   }
 
   fetchShared(): Observable<WishList[]> {
-    return this.http.get<WishList[]>(this.getBaseUrl() + '/wishlist/shared', httpOptions)
+    return this.http.get<WishList[]>(`${this.getBaseUrl()}/wishlist/shared?unique=${unique()}`, httpOptions)
         .pipe(catchError(this.handleError<WishList[]>('wishlist/shared')));
   }
 
   create(event: string, managed: boolean): Observable<WishList> {
-    return this.http.get<WishList>(this.getBaseUrl() + '/wishlist/create?event=' + event + '&managed=' + managed,
+    return this.http.get<WishList>(`${this.getBaseUrl()}/wishlist/create?event=${event}&managed=${managed}&unique=${unique()}`,
         httpOptions).pipe(catchError(this.handleError<WishList>('wishlist/create')));
   }
 
   delete(id: number): Observable<boolean> {
-    return this.http.get<boolean>(this.getBaseUrl() + '/wishlist/delete?id=' + id, httpOptions).pipe(
+    return this.http.get<boolean>(`${this.getBaseUrl()}/wishlist/delete?id=${id}&unique=${unique()}`, httpOptions).pipe(
         catchError(this.handleError<boolean>('wishlist/delete')));
   }
 

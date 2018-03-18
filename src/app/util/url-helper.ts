@@ -7,3 +7,7 @@ export function makeValidUrl(url: string): string {
   }
   return url;
 }
+
+export function unique(): number {
+  return new Date().getTime();
+}

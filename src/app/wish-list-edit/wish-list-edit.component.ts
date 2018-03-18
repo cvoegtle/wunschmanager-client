@@ -58,13 +58,12 @@ export class WishListEditComponent implements OnInit {
   editEvent() {
     let editDialog = this.dialog.open(EditEventDialogComponent, {
       data: {
-        event: this.wishList.event
+        wishList: this.wishList
       }
     });
 
     editDialog.afterClosed().subscribe(result => {
       if (result) {
-        this.wishList.event = result;
         this.updated.emit(this.wishList)
       }
     })

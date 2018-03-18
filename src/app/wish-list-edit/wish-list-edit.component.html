@@ -17,6 +17,7 @@
 
     </mat-panel-description>
   </mat-expansion-panel-header>
+  <p class="mat-body-1">{{wishList.description}}</p>
   <wish-edit *ngFor="let wish of wishes" [wish]="wish" (wishDeleted)="deleteWish($event)"
              (wishChange)="wishChanged($event)"></wish-edit>
   <button (click)="addWish()" mat-fab matTooltip="Wunsch hinzufügen" class="add-button"><i class="material-icons">create</i></button>

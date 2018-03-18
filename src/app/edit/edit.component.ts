@@ -58,7 +58,7 @@ export class EditComponent implements OnInit {
   }
 
   onUpdateEvent(wishList: WishList) {
-    this.wishListService.rename(wishList.id, wishList.event).subscribe(_ => {
+    this.wishListService.update(wishList).subscribe(_ => {
         },
         _ => this.errorHandler.handle('renameList'));
   }

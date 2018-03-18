@@ -6,6 +6,7 @@ import { catchError } from 'rxjs/operators';
 import { of } from "rxjs/observable/of";
 import { ConfigurationService } from "./configuration.service";
 import { unique } from "../util/url-helper";
+import { Wish } from "./wish";
 
 const httpOptions = {
   withCredentials: true
@@ -27,9 +28,9 @@ export class WishListService {
   }
 
 
-  rename(id: number, event: string): Observable<WishList> {
-    return this.http.get<WishList>(`${this.getBaseUrl()}/wishlist/rename?id=${id}&event=${event}&unique=${unique()}`, httpOptions)
-        .pipe(catchError(this.handleError<WishList>('wishlist/rename')));
+  update(wishList: WishList): Observable<WishList> {
+    return this.http.post<WishList>(`${this.getBaseUrl()}/wishlist/update?`, wishList, httpOptions)
+        .pipe(catchError(this.handleError<WishList>('wishlist/update')));
 
   }
 

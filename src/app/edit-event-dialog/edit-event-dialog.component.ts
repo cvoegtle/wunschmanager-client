@@ -1,5 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
+import { WishListService } from "../services/wish-list.service";
+import { WishList } from "../services/wish-list";
 
 @Component({
   selector: 'edit-event-dialog',
@@ -8,14 +10,26 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 })
 export class EditEventDialogComponent {
 
+  oldEvent: string;
+  wishList: WishList;
+  changed: boolean = false;
+
   constructor(public dialogRef: MatDialogRef<EditEventDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.wishList = data.wishList;
+    this.oldEvent = this.wishList.event;
+    this.dialogRef.backdropClick().subscribe(_ => this.doClose());
+    this.dialogRef.keydownEvents().subscribe(key => {
+      if (key.code == "Escape") this.doClose();
+    });
+
   }
 
-  isEmptyEvent() {
-    return this.data.event == null || this.data.event.length == 0;
-  }
-  cancelClicked() {
-    this.dialogRef.close();
+  private doClose() {
+    if (!this.wishList.event) this.wishList.event = this.oldEvent;
+    this.dialogRef.close(this.changed);
   }
 
+  valueChanged() {
+    this.changed = true;
+  }
 }

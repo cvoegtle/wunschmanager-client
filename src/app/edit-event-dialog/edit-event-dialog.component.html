@@ -1,8 +1,10 @@
 <h1 mat-dialog-title>Anlass ändern</h1>
 <div mat-dialog-content>
-    <mat-form-field class="edit-event">
-      <input #event_field matInput [(ngModel)]="data.event"/>
-    </mat-form-field>
-    <button mat-button [mat-dialog-close]="data.event" [disabled]="!data.event">ändern</button>
-    <button mat-button (click)="cancelClicked()">verwerfen</button>
+  <mat-form-field class="edit-event">
+    <input #event_field matInput [(ngModel)]="wishList.event" (change)="valueChanged()" />
+  </mat-form-field>
+  <mat-form-field class="edit-event">
+  <textarea matInput placeholder="Beschreibung" [(ngModel)]="wishList.description" matTextareaAutosize
+            matAutosizeMinRows="2" matAutosizeMaxRows="5" (change)="valueChanged()"></textarea>
+  </mat-form-field>
 </div>

@@ -4,5 +4,6 @@ export interface Wish {
   description: string;
   link: string;
   donor: string;
+  priority: number; // higher is better
   invisible: boolean;
 }

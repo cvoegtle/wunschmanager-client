@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>{{wish.caption}} Eigenschaften</h1>
+<h1 mat-dialog-title>{{wish.caption}}</h1>
 <div mat-dialog-content>
   <button mat-button *ngIf="!wish.invisible" (click)="toggleVisibility()" matTooltip="Wunsch verstecken">
     <i class="material-icons">visibility_off</i> Wunsch verstecken
@@ -6,4 +6,16 @@
   <button mat-button *ngIf="wish.invisible" (click)="toggleVisibility()" matTooltip="Wunsch wieder anzeigen">
     <i class="material-icons">visibility</i> Wunsch anzeigen
   </button>
+
+  <h2 class="mat-h2 priority-caption">Priorität</h2>
+
+  <mat-slider
+      class="priority-slider"
+      [max]="10"
+      [min]="0"
+      [step]="1"
+      [thumb-label]="true"
+      [(ngModel)]="wish.priority"
+      (change)="onPriorityChanged()">
+  </mat-slider>
 </div>

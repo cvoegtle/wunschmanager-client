@@ -9,7 +9,7 @@ import { Wish } from "../services/wish";
 })
 export class WishPropertiesComponent {
   wish: Wish;
-  changed: boolean;
+  changed: boolean = false;
 
   constructor(public dialogRef: MatDialogRef<WishPropertiesComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
@@ -22,6 +22,10 @@ export class WishPropertiesComponent {
 
   toggleVisibility() {
     this.wish.invisible = !this.wish.invisible;
+    this.changed = true;
+  }
+
+  onPriorityChanged() {
     this.changed = true;
   }
 

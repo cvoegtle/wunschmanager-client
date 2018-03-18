@@ -6,12 +6,37 @@ import { AppComponent } from './app.component';
 import { EditComponent } from './edit/edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
-  MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule,
-  MatChipsModule, MatDatepickerModule, MatDialogModule, MatExpansionModule, MatGridListModule, MatIconModule,
-  MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatPaginatorModule, MatProgressBarModule,
-  MatProgressSpinnerModule, MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule,
-  MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatStepperModule, MatTableModule, MatTabsModule,
-  MatToolbarModule, MatTooltipModule,
+  MatAutocompleteModule,
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatPaginatorModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatSortModule,
+  MatStepperModule,
+  MatTableModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatTooltipModule,
 } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { CdkTableModule } from '@angular/cdk/table';
@@ -34,6 +59,7 @@ import { EditEventDialogComponent } from './edit-event-dialog/edit-event-dialog.
 import { ViewComponent } from './view/view.component';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 import { ErrorHandler } from './error-handler/error-handler.component';
+import { WishPropertiesComponent } from './wish-properties/wish-properties.component';
 
 @NgModule({
   exports: [
@@ -76,11 +102,13 @@ export class WishMaterialModule {
 }
 
 @NgModule({
-  entryComponents: [ShareDialogComponent, DeleteItemDialogComponent, EditEventDialogComponent, ErrorDialogComponent],
+  entryComponents: [ShareDialogComponent, DeleteItemDialogComponent, EditEventDialogComponent, WishPropertiesComponent,
+    ErrorDialogComponent],
   declarations: [
     AppComponent, EditComponent, WishListEditComponent, WishEditComponent, LoginComponent,
     ShareDialogComponent, WishViewComponent, WishListViewComponent, ShareComponent, AllSharedComponent,
-    DeleteItemDialogComponent, NamePartPipe, EditEventDialogComponent, ViewComponent, ErrorDialogComponent, ErrorHandler
+    DeleteItemDialogComponent, WishPropertiesComponent, NamePartPipe, EditEventDialogComponent, ViewComponent,
+    ErrorDialogComponent, ErrorHandler
   ],
   imports: [
     BrowserModule, HttpClientModule, FormsModule, BrowserAnimationsModule, WishMaterialModule, MatNativeDateModule,

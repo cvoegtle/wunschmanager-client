@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Wish } from "../services/wish";
-import { MatSnackBar } from "@angular/material";
 import { makeValidUrl } from "../util/url-helper";
+import { WishPropertiesComponent } from "../wish-properties/wish-properties.component";
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'wish-edit',
@@ -13,7 +14,7 @@ export class WishEditComponent implements OnInit {
   @Output() wishDeleted = new EventEmitter<Wish>();
   @Output() wishChange = new EventEmitter<Wish>();
 
-  constructor(private snackBar: MatSnackBar) {
+  constructor(private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -43,22 +44,19 @@ export class WishEditComponent implements OnInit {
     this.wishChange.emit(this.wish)
   }
 
-  toggleVisibility() {
-    this.wish.invisible = !this.wish.invisible;
-    this.snackBar.open(this.createVisibilityMessage(), null, {duration: 2000});
-    this.wishChange.emit(this.wish)
+  settingsClicked() {
+    let settingsDialog = this.dialog.open(WishPropertiesComponent, {
+      data: {
+        wish: this.wish
+      }
+    });
+
+    settingsDialog.afterClosed().subscribe(result => {
+      if (result) this.wishChange.emit(this.wish);
+    });
   }
 
   targetUrl() {
     return makeValidUrl(this.wish.link);
-  }
-
-
-  private createVisibilityMessage(): string {
-    if (this.wish.invisible) {
-      return "Dieser Wunsch wird nicht mehr angezeigt"
-    } else {
-      return "Dieser Wunsch wird wieder angezeigt"
-    }
   }
 }

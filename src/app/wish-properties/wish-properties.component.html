@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>{{wish.caption}} Eigenschaften</h1>
+<div mat-dialog-content>
+  <button mat-button *ngIf="!wish.invisible" (click)="toggleVisibility()" matTooltip="Wunsch verstecken">
+    <i class="material-icons">visibility_off</i> Wunsch verstecken
+  </button>
+  <button mat-button *ngIf="wish.invisible" (click)="toggleVisibility()" matTooltip="Wunsch wieder anzeigen">
+    <i class="material-icons">visibility</i> Wunsch anzeigen
+  </button>
+</div>

@@ -5,14 +5,11 @@
         <mat-form-field class="wish-full-width">
           <input matInput placeholder="Wunsch" [value]="wish.caption" (change)="onCaptionChange($event)">
         </mat-form-field>
+        <button mat-icon-button (click)="settingsClicked()" matTooltip="Eigenschaften bearbeiten">
+          <i class="material-icons">settings</i>
+        </button>
         <button mat-icon-button (click)="deleteClicked()" matTooltip="Wunsch löschen">
           <i class="material-icons">delete</i>
-        </button>
-        <button mat-icon-button *ngIf="!wish.invisible" (click)="toggleVisibility()" matTooltip="Wunsch verstecken">
-          <i class="material-icons">visibility_off</i>
-        </button>
-        <button mat-icon-button *ngIf="wish.invisible" (click)="toggleVisibility()" matTooltip="Wunsch wieder anzeigen">
-          <i class="material-icons">visibility</i>
         </button>
       </div>
       <mat-form-field class="wish-full-width">

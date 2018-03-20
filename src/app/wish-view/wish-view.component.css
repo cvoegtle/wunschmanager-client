@@ -34,5 +34,6 @@ mat-card:first-of-type {
     flex-direction: row;
 }
 
-.donate-button {
+.wish-donor {
+    font-weight: bold;
 }

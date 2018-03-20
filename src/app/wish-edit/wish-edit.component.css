@@ -36,3 +36,7 @@
 mat-card {
     padding: 24px 24px 10px 24px;
 }
+
+.wish-donor {
+    font-weight: bold;
+}

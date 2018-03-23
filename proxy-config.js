@@ -6,8 +6,7 @@ const PROXY_CONFIG = [{
     "/_ah"
   ],
   target: "http://localhost:8080",
-  secure: false,
-  logLevel: "debug"
+  secure: false
 }]
 
 module.exports = PROXY_CONFIG;

@@ -4,6 +4,7 @@ import { Observable } from "rxjs/Observable";
 import { catchError } from "rxjs/operators";
 import { UserStatus } from "./user.status";
 import { ConfigurationService } from "./configuration.service";
+import { unique } from "../util/url-helper";
 
 const httpOptions = {
   withCredentials: true
@@ -18,7 +19,7 @@ export class UserService {
 
   fetchStatus(): Observable<UserStatus> {
     if (this.lastUserStatus == null) {
-      this.lastUserStatus = this.http.get<UserStatus>(`${this.getBaseUrl()}/user/status?startUrl=${this.getApplicationUrl()}&unique=${new Date()}`, httpOptions).pipe(
+      this.lastUserStatus = this.http.get<UserStatus>(`${this.getBaseUrl()}/user/status?startUrl=${this.getApplicationUrl()}&unique=${unique()}`, httpOptions).pipe(
           catchError(this.handleError<UserStatus>('user/status')));
     }
     return this.lastUserStatus

@@ -5,7 +5,7 @@ import { makeValidUrl } from "../util/url-helper";
 @Component({
   selector: 'app-wish-view',
   templateUrl: './wish-view.component.html',
-  styleUrls: ['./wish-view.component.css']
+  styleUrls: ['./wish-view.component.css', '../wish-properties/wish-properties.component.css']
 })
 export class WishViewComponent implements OnInit {
   @Input() wish: Wish;
@@ -20,8 +20,26 @@ export class WishViewComponent implements OnInit {
   }
 
   isAvailable(): boolean {
-    return this.wish.donor == null || this.wish.donor.length == 0 || this.wish.donor == this.user;
+    return this.wish.donor == null|| this.wish.donor == this.user;
   }
+
+  isRed() {
+    return this.isAvailable() && this.wish.background == "red";
+  }
+
+  isYellow() {
+    return this.isAvailable() && this.wish.background == "yellow";
+  }
+
+  isGreen() {
+    return this.isAvailable() && this.wish.background == "green";
+  }
+
+  isBlue() {
+    return this.isAvailable() && this.wish.background == "blue";
+  }
+
+
 
   isMyPresent(): boolean {
     return this.wish.donor == this.user;

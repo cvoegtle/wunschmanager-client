@@ -29,4 +29,8 @@ export class WishPropertiesComponent {
     this.changed = true;
   }
 
+  onBackgroundChanged() {
+    this.changed = true;
+  }
+
 }

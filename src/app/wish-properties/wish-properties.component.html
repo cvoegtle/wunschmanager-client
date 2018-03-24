@@ -1,21 +1,33 @@
 <h1 mat-dialog-title>{{wish.caption}}</h1>
 <div mat-dialog-content>
-  <button mat-button *ngIf="!wish.invisible" (click)="toggleVisibility()" matTooltip="Wunsch verstecken">
-    <i class="material-icons">visibility_off</i> Wunsch verstecken
-  </button>
-  <button mat-button *ngIf="wish.invisible" (click)="toggleVisibility()" matTooltip="Wunsch wieder anzeigen">
-    <i class="material-icons">visibility</i> Wunsch anzeigen
-  </button>
+  <div class="properties-dialog">
+    <button mat-button *ngIf="!wish.invisible" (click)="toggleVisibility()" matTooltip="Wunsch verstecken">
+      <i class="material-icons">visibility_off</i> Wunsch verstecken
+    </button>
+    <button mat-button *ngIf="wish.invisible" (click)="toggleVisibility()" matTooltip="Wunsch wieder anzeigen">
+      <i class="material-icons">visibility</i> Wunsch anzeigen
+    </button>
 
-  <h2 class="mat-h2 priority-caption">Priorität</h2>
+    <h2 class="mat-h2 priority-caption">Priorität</h2>
 
-  <mat-slider
-      class="priority-slider"
-      [max]="10"
-      [min]="0"
-      [step]="1"
-      [thumb-label]="true"
-      [(ngModel)]="wish.priority"
-      (change)="onPriorityChanged()">
-  </mat-slider>
+    <mat-slider
+        class="properties-control"
+        [max]="10"
+        [min]="0"
+        [step]="1"
+        [thumb-label]="true"
+        [(ngModel)]="wish.priority"
+        (change)="onPriorityChanged()">
+    </mat-slider>
+
+    <mat-form-field class="properties-control">
+      <mat-select [(value)]="wish.background" placeholder="Hintergrundfarbe" (change)="onBackgroundChanged()">
+        <mat-option></mat-option>
+        <mat-option value="red"><div class="background-red">&nbsp;rot</div></mat-option>
+        <mat-option value="yellow"><div class="background-yellow">&nbsp;gelb</div></mat-option>
+        <mat-option value="green"><div class="background-green">&nbsp;grün</div></mat-option>
+        <mat-option value="blue"><div class="background-blue">&nbsp;blau</div></mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
 </div>

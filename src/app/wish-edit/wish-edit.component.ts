@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material';
 @Component({
   selector: 'wish-edit',
   templateUrl: './wish-edit.component.html',
-  styleUrls: ['./wish-edit.component.css']
+  styleUrls: ['./wish-edit.component.css', '../wish-properties/wish-properties.component.css']
 })
 export class WishEditComponent implements OnInit {
   @Input() wish: Wish;
@@ -20,10 +20,25 @@ export class WishEditComponent implements OnInit {
   ngOnInit() {
   }
 
-  isUnavailable(): boolean {
-    return (this.wish.donor != null && this.wish.donor.length > 0) || this.wish.invisible;
+  isAvailable(): boolean {
+    return this.wish.donor == null && !this.wish.invisible;
   }
 
+  isRed() {
+    return this.isAvailable() && this.wish.background == "red";
+  }
+
+  isYellow() {
+    return this.isAvailable() && this.wish.background == "yellow";
+  }
+
+  isGreen() {
+    return this.isAvailable() && this.wish.background == "green";
+  }
+
+  isBlue() {
+    return this.isAvailable() && this.wish.background == "blue";
+  }
 
   deleteClicked() {
     this.wishDeleted.emit(this.wish);

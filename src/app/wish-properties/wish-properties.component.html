@@ -4,10 +4,10 @@
     <mat-form-field class="properties-control">
       <mat-select [(value)]="wish.background" placeholder="Hintergrundfarbe" (change)="onBackgroundChanged()">
         <mat-option></mat-option>
-        <mat-option value="red"><div class="background-red">&nbsp;rot</div></mat-option>
-        <mat-option value="yellow"><div class="background-yellow">&nbsp;gelb</div></mat-option>
-        <mat-option value="green"><div class="background-green">&nbsp;grün</div></mat-option>
-        <mat-option value="blue"><div class="background-blue">&nbsp;blau</div></mat-option>
+        <mat-option value="red"><div class="background-red foreground-red">rot</div></mat-option>
+        <mat-option value="yellow"><div class="background-yellow foreground-yellow">gelb</div></mat-option>
+        <mat-option value="green"><div class="background-green foreground-green">grün</div></mat-option>
+        <mat-option value="blue"><div class="background-blue foreground-blue">blau</div></mat-option>
       </mat-select>
     </mat-form-field>
 

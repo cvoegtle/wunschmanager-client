@@ -12,7 +12,7 @@
 
     </mat-panel-description>
   </mat-expansion-panel-header>
-  <p class="mat-body-1">{{wishList.description}}</p>
+  <div class="mat-body-1 wish-list-info">{{wishList.description}}</div>
   <app-wish-view *ngFor="let wish of wishes" [wish]="wish" [user]="userStatus.name" [restricted]="restricted"
                  (reserved)="reserveClicked($event)"></app-wish-view>
 </mat-expansion-panel>

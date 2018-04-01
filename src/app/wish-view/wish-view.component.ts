@@ -5,7 +5,7 @@ import { makeValidUrl } from "../util/url-helper";
 @Component({
   selector: 'app-wish-view',
   templateUrl: './wish-view.component.html',
-  styleUrls: ['./wish-view.component.css', '../wish-properties/wish-properties.component.css']
+  styleUrls: ['../wish-edit/wish.component.css']
 })
 export class WishViewComponent implements OnInit {
   @Input() wish: Wish;

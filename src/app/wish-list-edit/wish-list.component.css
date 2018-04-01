@@ -4,6 +4,7 @@ mat-expansion-panel {
 
 .filler {
     flex: 1 1 auto;
+    margin-top: 10px;
 }
 
 .add-button {
@@ -14,6 +15,7 @@ mat-expansion-panel {
 
 .event {
     margin-top: 10px;
+    height: 30px;
     font-weight: bold;
 }
 
@@ -25,4 +27,10 @@ mat-expansion-panel {
 
 .open-list {
     background: lightblue;
+}
+
+.wish-list-info {
+    white-space: pre-line;
+    background: lightblue;
+    width: 100%;
 }

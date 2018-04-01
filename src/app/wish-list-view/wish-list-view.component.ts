@@ -9,7 +9,7 @@ import { ErrorHandler } from '../error-handler/error-handler.component';
 @Component({
   selector: 'wish-list-view',
   templateUrl: './wish-list-view.component.html',
-  styleUrls: ['./wish-list-view.component.css']
+  styleUrls: ['../wish-list-edit/wish-list.component.css']
 })
 export class WishListViewComponent implements OnInit {
   @Input() wishList: WishList;

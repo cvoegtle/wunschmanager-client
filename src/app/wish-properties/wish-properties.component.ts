@@ -5,7 +5,7 @@ import { Wish } from "../services/wish";
 @Component({
   selector: 'app-wish-properties',
   templateUrl: './wish-properties.component.html',
-  styleUrls: ['./wish-properties.component.css']
+  styleUrls: ['../wish-edit/wish.component.css']
 })
 export class WishPropertiesComponent {
   wish: Wish;

@@ -8,7 +8,7 @@ import { ErrorHandler } from '../error-handler/error-handler.component';
 @Component({
   selector: 'app-view',
   templateUrl: './view.component.html',
-  styleUrls: ['./view.component.css']
+  styleUrls: []
 })
 export class ViewComponent implements OnInit {
   wishList: WishList;

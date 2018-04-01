@@ -9,7 +9,7 @@
         </a>
         <div *ngIf="!wish.link">
           <div class="caption" *ngIf="wish.caption">{{wish.caption}}</div>
-          <div *ngIf="wish.description">{{wish.description}}</div>
+          <div class="description" *ngIf="wish.description">{{wish.description}}</div>
         </div>
       </div>
       <div matLine *ngIf="wish.donor">

@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material';
 @Component({
   selector: 'wish-edit',
   templateUrl: './wish-edit.component.html',
-  styleUrls: ['./wish-edit.component.css', '../wish-properties/wish-properties.component.css']
+  styleUrls: ['./wish.component.css']
 })
 export class WishEditComponent implements OnInit {
   @Input() wish: Wish;

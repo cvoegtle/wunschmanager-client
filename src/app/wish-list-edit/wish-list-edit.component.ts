@@ -13,7 +13,7 @@ import { ErrorHandler } from "../error-handler/error-handler.component";
 @Component({
   selector: 'wish-list-edit',
   templateUrl: './wish-list-edit.component.html',
-  styleUrls: ['./wish-list-edit.component.css']
+  styleUrls: ['./wish-list.component.css']
 })
 export class WishListEditComponent implements OnInit {
   @Input() wishList: WishList;

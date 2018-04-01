@@ -26,7 +26,14 @@ export class UserService {
   }
 
   getApplicationUrl() {
-    return window.location.href;
+    let protocol = window.location.protocol;
+    let hostname = window.location.hostname;
+    let port = window.location.port;
+    if (port == '80' || port == '443') {
+      return `${protocol}//${hostname}`;
+    } else {
+      return `${protocol}//${hostname}:${port}`;
+    }
   }
 
 

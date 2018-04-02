@@ -5,11 +5,12 @@ import { WishService } from '../services/wish.service';
 import { UserService } from '../services/user.service';
 import { UserStatus } from '../services/user.status';
 import { ErrorHandler } from '../error-handler/error-handler.component';
+import { isBlue, isGreen, isRed, isYellow } from "../util/color";
 
 @Component({
   selector: 'wish-list-view',
   templateUrl: './wish-list-view.component.html',
-  styleUrls: ['../wish-list-edit/wish-list.component.css']
+  styleUrls: ['../wish-list-edit/wish-list.component.css', '../util/color.css']
 })
 export class WishListViewComponent implements OnInit {
   @Input() wishList: WishList;
@@ -33,7 +34,7 @@ export class WishListViewComponent implements OnInit {
   panelOpened() {
     this.wishService.fetchWishes(this.wishList.id).subscribe(wishes => {
           this.wishes = wishes;
-          this.panelOpenState = true
+          this.panelOpenState = this.wishList.background == null;
         },
         _ => this.errorHandler.handle('fetchWishes'))
   }
@@ -50,4 +51,21 @@ export class WishListViewComponent implements OnInit {
     this.wishService.reserve(this.wishList.id, wish.id).subscribe(updatedWish => wish.donor = updatedWish.donor,
         _ => this.errorHandler.handle('reserveWish'));
   }
+
+  isRed():boolean {
+    return isRed(this.wishList.background);
+  }
+
+  isGreen(): boolean {
+    return isGreen(this.wishList.background);
+  }
+
+  isBlue(): boolean {
+    return isBlue(this.wishList.background);
+  }
+
+  isYellow(): boolean {
+    return isYellow(this.wishList.background);
+  }
+
 }

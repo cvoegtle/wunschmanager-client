@@ -5,4 +5,5 @@ export interface WishList {
   event: string;
   description: string;
   managed: boolean;
+  background: string;
 }

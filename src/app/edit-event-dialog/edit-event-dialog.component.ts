@@ -6,7 +6,7 @@ import { WishList } from "../services/wish-list";
 @Component({
   selector: 'edit-event-dialog',
   templateUrl: './edit-event-dialog.component.html',
-  styleUrls: ['./edit-event-dialog.component.css']
+  styleUrls: ['./edit-event-dialog.component.css', '../util/color.css']
 })
 export class EditEventDialogComponent {
 

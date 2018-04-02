@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Wish } from "../services/wish";
+import { isAvailable, Wish } from "../services/wish";
 import { makeValidUrl } from "../util/url-helper";
-import { isBlue, isGreen, isRed, isYellow } from "../util/Color";
+import { isBlue, isGreen, isRed, isYellow } from "../util/color";
 
 @Component({
   selector: 'app-wish-view',
   templateUrl: './wish-view.component.html',
-  styleUrls: ['../wish-edit/wish.component.css']
+  styleUrls: ['../wish-edit/wish.component.css', '../util/color.css']
 })
 export class WishViewComponent implements OnInit {
   @Input() wish: Wish;
@@ -20,24 +20,24 @@ export class WishViewComponent implements OnInit {
   ngOnInit() {
   }
 
-  isAvailable(): boolean {
-    return this.wish.donor == null || this.wish.donor == this.user;
+  isAvailable() {
+    return isAvailable(this.wish);
   }
 
   isRed() {
-    return this.isAvailable() && isRed(this.wish.background);
+    return isAvailable(this.wish) && isRed(this.wish.background);
   }
 
   isYellow() {
-    return this.isAvailable() && isYellow(this.wish.background);
+    return isAvailable(this.wish) && isYellow(this.wish.background);
   }
 
   isGreen() {
-    return this.isAvailable() && isGreen(this.wish.background);
+    return isAvailable(this.wish) && isGreen(this.wish.background);
   }
 
   isBlue() {
-    return this.isAvailable() && isBlue(this.wish.background);
+    return isAvailable(this.wish) && isBlue(this.wish.background);
   }
 
 

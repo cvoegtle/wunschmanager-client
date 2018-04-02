@@ -1,4 +1,6 @@
-<mat-expansion-panel (opened)="panelOpened()" (closed)="panelClosed()" [expanded]="expanded" [ngClass]="{'open-list': panelOpenState}">
+<mat-expansion-panel (opened)="panelOpened()" (closed)="panelClosed()" [expanded]="expanded"
+                     [ngClass]="{'open-list': panelOpenState, 'background-red': isRed(), 'background-yellow': isYellow(),
+                     'background-green': isGreen(), 'background-blue': isBlue()}">
   <mat-expansion-panel-header>
     <mat-panel-title>
       <span class="event">{{wishList.event}}</span>
@@ -6,7 +8,8 @@
     <mat-panel-description>
       <span class="filler">{{wishList.owner | name}} <span *ngIf="wishList.managed">(Verwalter)</span></span>
 
-      <button *ngIf="deleteEnabled" mat-icon-button (click)="deleteClicked()" matTooltip="Wunschliste aus der Ansicht entfernen">
+      <button *ngIf="deleteEnabled" mat-icon-button (click)="deleteClicked()"
+              matTooltip="Wunschliste aus der Ansicht entfernen">
         <i class="material-icons">delete</i>
       </button>
 

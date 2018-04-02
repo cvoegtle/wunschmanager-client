@@ -3,12 +3,12 @@ import { isAvailable, Wish } from "../services/wish";
 import { makeValidUrl } from "../util/url-helper";
 import { WishPropertiesComponent } from "../wish-properties/wish-properties.component";
 import { MatDialog } from '@angular/material';
-import { isBlue, isGreen, isRed, isYellow } from "../util/Color";
+import { isBlue, isGreen, isRed, isYellow } from "../util/color";
 
 @Component({
   selector: 'wish-edit',
   templateUrl: './wish-edit.component.html',
-  styleUrls: ['./wish.component.css']
+  styleUrls: ['./wish.component.css', '../util/color.css']
 })
 export class WishEditComponent implements OnInit {
   @Input() wish: Wish;
@@ -19,6 +19,10 @@ export class WishEditComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  isAvailable() {
+    return isAvailable(this.wish);
   }
 
   isRed() {

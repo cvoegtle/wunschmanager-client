@@ -8,12 +8,13 @@ import { DeleteItemDialogComponent } from '../delete-item-dialog/delete-item-dia
 import { EditEventDialogComponent } from '../edit-event-dialog/edit-event-dialog.component';
 import { ErrorDialogComponent } from "../error-dialog/error-dialog.component";
 import { ErrorHandler } from "../error-handler/error-handler.component";
+import { isBlue, isGreen, isRed, isYellow } from "../util/color";
 
 
 @Component({
   selector: 'wish-list-edit',
   templateUrl: './wish-list-edit.component.html',
-  styleUrls: ['./wish-list.component.css']
+  styleUrls: ['./wish-list.component.css', '../util/color.css']
 })
 export class WishListEditComponent implements OnInit {
   @Input() wishList: WishList;
@@ -32,7 +33,7 @@ export class WishListEditComponent implements OnInit {
   panelOpened() {
     this.wishService.fetchWishes(this.wishList.id).subscribe(wishes => {
           this.wishes = wishes;
-          this.panelOpenState = true
+          this.panelOpenState = this.wishList.background == null;
         },
         _ => this.errorHandler.handle('fetchWishes'))
   }
@@ -133,6 +134,22 @@ export class WishListEditComponent implements OnInit {
     } else {
       return wish.description;
     }
+  }
+
+  isRed():boolean {
+    return isRed(this.wishList.background);
+  }
+
+  isGreen(): boolean {
+    return isGreen(this.wishList.background);
+  }
+
+  isBlue(): boolean {
+    return isBlue(this.wishList.background);
+  }
+
+  isYellow(): boolean {
+    return isYellow(this.wishList.background);
   }
 
 }

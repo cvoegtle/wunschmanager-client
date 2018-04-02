@@ -3,10 +3,13 @@
   <mat-expansion-panel-header>
     <mat-panel-title>
       <span class="event" (click)="editEvent()">{{wishList.event}}</span>
-      <span class="managed" *ngIf="wishList.managed">(verwaltet)</span>
+      <!-- <button mat-icon-button (click)="editEvent()" matTooltip="Wunschlisteneigenschaften bearbeiten">
+        <i class="material-icons">edit</i>
+      </button> -->
+
     </mat-panel-title>
     <mat-panel-description>
-      <span class="filler"></span>
+      <span class="filler"><span class="managed" *ngIf="wishList.managed">(verwaltet)</span></span>
 
       <button mat-icon-button (click)="shareClicked()" matTooltip="Liste weitergeben">
         <i class="material-icons">share</i>

@@ -31,6 +31,6 @@ mat-expansion-panel {
 
 .wish-list-info {
     white-space: pre-line;
-    background: lightblue;
+    background: transparent;
     width: 100%;
 }

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Wish } from "../services/wish";
 import { makeValidUrl } from "../util/url-helper";
+import { isBlue, isGreen, isRed, isYellow } from "../util/Color";
 
 @Component({
   selector: 'app-wish-view',
@@ -20,25 +21,24 @@ export class WishViewComponent implements OnInit {
   }
 
   isAvailable(): boolean {
-    return this.wish.donor == null|| this.wish.donor == this.user;
+    return this.wish.donor == null || this.wish.donor == this.user;
   }
 
   isRed() {
-    return this.isAvailable() && this.wish.background == "red";
+    return this.isAvailable() && isRed(this.wish.background);
   }
 
   isYellow() {
-    return this.isAvailable() && this.wish.background == "yellow";
+    return this.isAvailable() && isYellow(this.wish.background);
   }
 
   isGreen() {
-    return this.isAvailable() && this.wish.background == "green";
+    return this.isAvailable() && isGreen(this.wish.background);
   }
 
   isBlue() {
-    return this.isAvailable() && this.wish.background == "blue";
+    return this.isAvailable() && isBlue(this.wish.background);
   }
-
 
 
   isMyPresent(): boolean {

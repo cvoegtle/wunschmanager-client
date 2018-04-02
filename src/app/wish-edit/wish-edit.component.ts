@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Wish } from "../services/wish";
+import { isAvailable, Wish } from "../services/wish";
 import { makeValidUrl } from "../util/url-helper";
 import { WishPropertiesComponent } from "../wish-properties/wish-properties.component";
 import { MatDialog } from '@angular/material';
+import { isBlue, isGreen, isRed, isYellow } from "../util/Color";
 
 @Component({
   selector: 'wish-edit',
@@ -20,24 +21,20 @@ export class WishEditComponent implements OnInit {
   ngOnInit() {
   }
 
-  isAvailable(): boolean {
-    return this.wish.donor == null && !this.wish.invisible;
-  }
-
   isRed() {
-    return this.isAvailable() && this.wish.background == "red";
+    return isAvailable(this.wish) && isRed(this.wish.background);
   }
 
   isYellow() {
-    return this.isAvailable() && this.wish.background == "yellow";
+    return isAvailable(this.wish) && isYellow(this.wish.background);
   }
 
   isGreen() {
-    return this.isAvailable() && this.wish.background == "green";
+    return isAvailable(this.wish) && isGreen(this.wish.background);
   }
 
   isBlue() {
-    return this.isAvailable() && this.wish.background == "blue";
+    return isAvailable(this.wish) && isBlue(this.wish.background);
   }
 
   deleteClicked() {

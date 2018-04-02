@@ -8,3 +8,7 @@ export interface Wish {
   background: string;
   invisible: boolean;
 }
+
+export function isAvailable(wish: Wish): boolean {
+  return wish.donor == null && !wish.invisible;
+}
